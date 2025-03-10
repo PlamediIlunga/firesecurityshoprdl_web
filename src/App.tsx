@@ -12,19 +12,22 @@ import Catalogue from './pages/Catalogue';
 import ProductDetails from './pages/ProductDetails';
 
 const router = createBrowserRouter(
-        createRoutesFromElements(
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Login />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Administration/Product" element={<Product />} />
-            <Route path="/Kart" element={<Kart />} />
-            <Route path="/Administration/Catalogue" element={<Catalogue />} />
-            <Route path="/Produit/:id" element={<ProductDetails />} />
-          </Route>
-        )
-
-
+  createRoutesFromElements(
+    <Route path="/">
+      {/* Route de connexion sans le Layout avec menu */}
+      <Route index element={<Login />} />
+      
+      {/* Routes protégées avec le Layout incluant le menu */}
+      <Route element={<Layout />}>
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Administration/Product" element={<Product />} />
+        <Route path="/Kart" element={<Kart />} />
+        <Route path="/Administration/Catalogue" element={<Catalogue />} />
+        <Route path="/Produit/:id" element={<ProductDetails />} />
+      </Route>
+    </Route>
   )
+)
 function App() {
   return (
     <RouterProvider router={router}>

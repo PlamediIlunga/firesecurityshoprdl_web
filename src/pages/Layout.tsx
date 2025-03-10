@@ -39,8 +39,7 @@ const Layout = () => {
       <hr />
       <Outlet />
       <footer className="footer">
-        <h1 className="textFooter">Nos produits sont aussi fiables que le css de cette page , À vous d'en juger< br />
-          P.S: AUCUN REMBOURSEMENT
+        <h1 className="textFooter">Footer
         </h1>
       </footer>
     </body>

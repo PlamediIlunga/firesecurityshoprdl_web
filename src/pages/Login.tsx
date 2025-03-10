@@ -1,4 +1,4 @@
-import '../styles/Login.scss'
+//import '../styles/Login.scss'
 import { useState, useEffect } from 'react';
 import UserModel from '../modeles/usersModel';
 import { useNavigate } from 'react-router-dom';
@@ -70,23 +70,43 @@ export default function Login() {
     };
 
     return (
-        <div className="login-container">
-            <div>
+        <div className="min-h-screen bg-red-900 flex items-center justify-center p-6">
+            <div className="hidden">
                 {users.map(user => (
                     <div key={user.idUser}>
                         {user.username} - {user.email}
                     </div>
-                ))}</div>
-            <div className="login-box">
-                <h1>Connexion</h1>
-                <input type="text" placeholder="Nom d'utilisateur" value={usernameInput} 
-                 onChange={(e) => setUsername(e.target.value)}
-                 required />
-                <input type="password" placeholder="Mot de passe" value={passwordInput}
-                onChange={(e) => setPassword(e.target.value)}
-                required />
-                <button onClick={handlelogin}>Se connecter</button>
-                <p>Mot de passe oublié ? <a href="#">Cliquez ici</a></p>
+                ))}
+            </div>
+            <div className="bg-blue-900 rounded-lg border-4 border-yellow-400 p-8 w-full max-w-md shadow-xl">
+                <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Connexion</h1>
+                <div className="space-y-4">
+                    <input 
+                        type="text" 
+                        placeholder="Nom d'utilisateur" 
+                        value={usernameInput} 
+                        onChange={(e) => setUsername(e.target.value)}
+                        required 
+                        className="w-full p-3 rounded border border-yellow-400 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Mot de passe" 
+                        value={passwordInput}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required 
+                        className="w-full p-3 rounded border border-yellow-400 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    />
+                    <button 
+                        onClick={handlelogin}
+                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded border-2 border-yellow-400 transition duration-300"
+                    >
+                        Se connecter
+                    </button>
+                    <p className="text-white text-center mt-4">
+                        Mot de passe oublié ? <a href="#" className="text-yellow-400 hover:text-yellow-300 underline">Cliquez ici</a>
+                    </p>
+                </div>
             </div>
         </div>
     );
