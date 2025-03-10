@@ -1,4 +1,3 @@
-import React from 'react';
 import ProduitItem from '../types/ProduitItem';
 import MyProducts from '../components/ProductComponent';
 import { useState, useEffect } from 'react';
