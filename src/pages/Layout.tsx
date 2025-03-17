@@ -20,7 +20,7 @@ const Layout = () => {
               <Link to="/kart" className="text-white hover:text-yellow-400 font-medium transition duration-300">Panier</Link>
             </li>
             <li className="mx-2">
-              <Link to="/Administration/Product" className="text-white hover:text-yellow-400 font-medium transition duration-300">Administration</Link>
+              <Link to="/Administration/Product" className="text-white hover:text-yellow-400 font-medium transition duration-300">Produit</Link>
             </li>
           </ul>
         </nav>

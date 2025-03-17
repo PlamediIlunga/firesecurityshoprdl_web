@@ -1,6 +1,6 @@
 export default interface ProduitItem {
-id:Int16Array,
-noAtricle:string,
+idItem:number,
+noArticle:string,
 name:string,
 points:number,
 description:string,
