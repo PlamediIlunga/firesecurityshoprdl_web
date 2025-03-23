@@ -19,8 +19,9 @@ export default function Kart() {
         setIsLoading(true);
         // Récupérer les produits depuis localStorage
         const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+        setProducts(cartItems);
         // Si le panier est vide dans localStorage, charger les données par défaut
-        if (cartItems.length === 0) {
+        /*if (cartItems.length === 0) {
           const defaultProducts = casePostalBD.Panier.map(product => ({
             idItem: product.idItem,
             noArticle: product.noArticle,
@@ -34,7 +35,7 @@ export default function Kart() {
           localStorage.setItem('cart', JSON.stringify(defaultProducts));
         } else {
           setProducts(cartItems);
-        }
+        }*/
       } catch (error) {
         console.error("Erreur lors de la récupération des produits du panier :", error);
       } finally {
