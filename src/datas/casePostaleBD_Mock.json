@@ -1,0 +1,526 @@
+{
+    "Panier": [
+        {
+            "idItem": 1,
+            "noArticle": "6820Z NB",
+            "name": "Manteau 3-en-1 multifonctions",
+            "points": 245,
+            "description": "Uniforme de base pour toutes les casernes",
+            "imageUrl": "manteau_3en1.jpg"
+        },
+        {
+            "idItem": 2,
+            "noArticle": "BD-80",
+            "name": "Broderie du service sur doublure et coquille",
+            "points": 16,
+            "description": "Broderie personnalisée",
+            "imageUrl": "broderie_service.jpg"
+        },
+        {
+            "idItem": 3,
+            "noArticle": "DIV18",
+            "name": "Bande sur manteau",
+            "points": 18,
+            "description": "Bande réfléchissante",
+            "imageUrl": "bande_manteau.jpg"
+        },
+        {
+            "idItem": 18,
+            "noArticle": "1T9000",
+            "name": "Casquette bleue ou noire (avec grandeurs)",
+            "points": 33,
+            "description": "Casquette avec grandeurs",
+            "imageUrl": "casquette_bleu.jpg"
+        },
+        {
+            "idItem": 19,
+            "noArticle": "FP129",
+            "name": "Casquette noire ajustable (S/M)",
+            "points": 33,
+            "description": "Casquette ajustable",
+            "imageUrl": "casquette_noir.jpg"
+        },
+        {
+            "idItem": 20,
+            "noArticle": "Divers",
+            "name": "Bottes de travail",
+            "points": 159,
+            "description": "Bottes résistantes",
+            "imageUrl": "bottes_rmg.jpg"
+        }
+    ],
+    "Products": [
+        {
+            "idItem": 1,
+            "noArticle": "6820Z NB",
+            "name": "Manteau 3-en-1 multifonctions",
+            "points": 245,
+            "description": "Uniforme de base pour toutes les casernes",
+            "imageUrl": "manteau_3en1.jpg"
+        },
+        {
+            "idItem": 2,
+            "noArticle": "BD-80",
+            "name": "Broderie du service sur doublure et coquille",
+            "points": 16,
+            "description": "Broderie personnalisée",
+            "imageUrl": "broderie_service.jpg"
+        },
+        {
+            "idItem": 3,
+            "noArticle": "DIV18",
+            "name": "Bande sur manteau",
+            "points": 18,
+            "description": "Bande réfléchissante",
+            "imageUrl": "bande_manteau.jpg"
+        },
+        {
+            "idItem": 4,
+            "noArticle": "SCINC-1",
+            "name": "\"Incendie\" en scothchlite au devant de la coquille",
+            "points": 8,
+            "description": "Inscription réfléchissante",
+            "imageUrl": "incendie_devant.jpg"
+        },
+        {
+            "idItem": 5,
+            "noArticle": "SCINC-2",
+            "name": "\"Incendie\" en scothclite au dos de la coquille",
+            "points": 14,
+            "description": "Inscription réfléchissante dos",
+            "imageUrl": "incendie_dos.jpg"
+        },
+        {
+            "idItem": 6,
+            "noArticle": "Divers",
+            "name": "Écussons aux épaules",
+            "points": 0,
+            "description": "Inclus",
+            "imageUrl": "ecussons.jpg"
+        },
+        {
+            "idItem": 7,
+            "noArticle": "PTS5305 NB",
+            "name": "Pantalon Cargo",
+            "points": 48,
+            "description": "Pantalon uniforme de base",
+            "imageUrl": "pantalon_cargo.jpg"
+        },
+        {
+            "idItem": 8,
+            "noArticle": "SR1625 NB",
+            "name": "Chemises manches longues NB",
+            "points": 35,
+            "description": "Chemise uniforme de base",
+            "imageUrl": "chemise_longue.jpg"
+        },
+        {
+            "idItem": 9,
+            "noArticle": "SR1725 NB",
+            "name": "Chemises manches courtes NB",
+            "points": 34,
+            "description": "Chemise été uniforme de base",
+            "imageUrl": "chemise_courte.jpg"
+        },
+        {
+            "idItem": 10,
+            "noArticle": "8120X NB",
+            "name": "T-Shirt 3Xdry",
+            "points": 34,
+            "description": "T-shirt confortable",
+            "imageUrl": "tshirt_3xdry.jpg"
+        },
+        {
+            "idItem": 11,
+            "noArticle": "ML101GY",
+            "name": "Ceinture en cuir 1½ po - M & L",
+            "points": 22,
+            "description": "Ceinture uniforme de base",
+            "imageUrl": "ceinture_cuir.jpg"
+        },
+        {
+            "idItem": 12,
+            "noArticle": "ML1100 BK",
+            "name": "Ceinture avec logo incendie",
+            "points": 37,
+            "description": "Ceinture avec logo officiel",
+            "imageUrl": "ceinture_logo.jpg"
+        },
+        {
+            "idItem": 13,
+            "noArticle": "K2000",
+            "name": "Ceinture - RMG Prévention",
+            "points": 30,
+            "description": "Ceinture spéciale prévention",
+            "imageUrl": "ceinture_rmg.jpg"
+        },
+        {
+            "idItem": 14,
+            "noArticle": "NZ1200 NB",
+            "name": "Cravate à clip",
+            "points": 9,
+            "description": "Cravate facile à porter",
+            "imageUrl": "cravate_clip.jpg"
+        },
+        {
+            "idItem": 15,
+            "noArticle": "SK7131 NB",
+            "name": "Bas NB",
+            "points": 8,
+            "description": "Bas uniformes standard",
+            "imageUrl": "bas_nb.jpg"
+        },
+        {
+            "idItem": 16,
+            "noArticle": "Divers",
+            "name": "Bas",
+            "points": 7,
+            "description": "Bas standard",
+            "imageUrl": "bas_rmg.jpg"
+        },
+        {
+            "idItem": 17,
+            "noArticle": "Divers",
+            "name": "Sous-vêtement isolant (haut et bas)",
+            "points": 89,
+            "description": "Sous-vêtements thermiques",
+            "imageUrl": "sous_vetement.jpg"
+        },
+        {
+            "idItem": 18,
+            "noArticle": "1T9000",
+            "name": "Casquette bleue ou noire (avec grandeurs)",
+            "points": 33,
+            "description": "Casquette avec grandeurs",
+            "imageUrl": "casquette_bleu.jpg"
+        },
+        {
+            "idItem": 19,
+            "noArticle": "FP129",
+            "name": "Casquette noire ajustable (S/M)",
+            "points": 33,
+            "description": "Casquette ajustable",
+            "imageUrl": "casquette_noir.jpg"
+        },
+        {
+            "idItem": 20,
+            "noArticle": "Divers",
+            "name": "Bottes de travail",
+            "points": 159,
+            "description": "Bottes résistantes",
+            "imageUrl": "bottes_rmg.jpg"
+        },
+        {
+            "idItem": 21,
+            "noArticle": "Divers",
+            "name": "Bottes de travail",
+            "points": 165,
+            "description": "Bottes de travail standard",
+            "imageUrl": "bottes_boutique.jpg"
+        },
+        {
+            "idItem": 22,
+            "noArticle": "Divers",
+            "name": "Souliers de travail",
+            "points": 129,
+            "description": "Souliers confortables",
+            "imageUrl": "souliers_travail.jpg"
+        },
+        {
+            "idItem": 23,
+            "noArticle": "1G270M",
+            "name": "Tuque en laine avec logo (nouveau modèle)",
+            "points": 15,
+            "description": "Tuque nouveau modèle",
+            "imageUrl": "tuque_laine.jpg"
+        },
+        {
+            "idItem": 24,
+            "noArticle": "Divers",
+            "name": "Inclus à l'embauche aux pompiers de la caserne 14",
+            "points": 0,
+            "description": "Kit de base pour nouveaux employés",
+            "imageUrl": "kit_embauche.jpg"
+        },
+        {
+            "idItem": 25,
+            "noArticle": "T701MS",
+            "name": "T-Shirt d'entraînement avec logo (Renegate)",
+            "points": 46,
+            "description": "T-shirt sport",
+            "imageUrl": "tshirt_entrainement.jpg"
+        },
+        {
+            "idItem": 26,
+            "noArticle": "ST027M",
+            "name": "Culotte courte d'entraînement avec logo (Cool)",
+            "points": 37,
+            "description": "Short d'entraînement",
+            "imageUrl": "short_entrainement.jpg"
+        },
+        {
+            "idItem": 27,
+            "noArticle": "Divers",
+            "name": "Espadrilles",
+            "points": 99,
+            "description": "Chaussures d'entraînement",
+            "imageUrl": "espadrilles.jpg"
+        },
+        {
+            "idItem": 28,
+            "noArticle": "9840Z NB",
+            "name": "Manteau Blauer 3-en-1 en Gore-Tex",
+            "points": 370,
+            "description": "Manteau haut de gamme",
+            "imageUrl": "manteau_goretex.jpg"
+        },
+        {
+            "idItem": 29,
+            "noArticle": "BD-80",
+            "name": "Broderie au devant sur les 2 manteaux",
+            "points": 16,
+            "description": "Broderie personnalisée",
+            "imageUrl": "broderie_devant.jpg"
+        },
+        {
+            "idItem": 30,
+            "noArticle": "BD-80",
+            "name": "Broderie sur coquille",
+            "points": 8,
+            "description": "Broderie simple",
+            "imageUrl": "broderie_coquille.jpg"
+        },
+        {
+            "idItem": 31,
+            "noArticle": "SC9840-B",
+            "name": "\"Incendie\" en scothchlite au devant de la coquille et doublure",
+            "points": 20,
+            "description": "Inscription visible",
+            "imageUrl": "incendie_devant_double.jpg"
+        },
+        {
+            "idItem": 32,
+            "noArticle": "SC9840-B",
+            "name": "\"Incendie\" en scothclite au dos de la coquille et doublure",
+            "points": 30,
+            "description": "Inscription arrière visible",
+            "imageUrl": "incendie_dos_double.jpg"
+        },
+        {
+            "idItem": 33,
+            "noArticle": "EP9840",
+            "name": "Épaulettes",
+            "points": 15,
+            "description": "Épaulettes de grade",
+            "imageUrl": "epaulettes.jpg"
+        },
+        {
+            "idItem": 34,
+            "noArticle": "85625S NB",
+            "name": "Pantalon avec poches cargo",
+            "points": 97,
+            "description": "Pantalon robuste",
+            "imageUrl": "pantalon_poches.jpg"
+        },
+        {
+            "idItem": 35,
+            "noArticle": "8903X NB",
+            "name": "Chemise manches longues 3XD DRY",
+            "points": 66,
+            "description": "Chemise technologique",
+            "imageUrl": "chemise_tech_longue.jpg"
+        },
+        {
+            "idItem": 36,
+            "noArticle": "8910X NB",
+            "name": "Chemise manches courtes 3XD DRY",
+            "points": 62,
+            "description": "Chemise techno été",
+            "imageUrl": "chemise_tech_courte.jpg"
+        },
+        {
+            "idItem": 37,
+            "noArticle": "8110X NB",
+            "name": "Col cheminée manches longues NB 3XDRY",
+            "points": 34,
+            "description": "Chemise col montant",
+            "imageUrl": "chemise_col_longue.jpg"
+        },
+        {
+            "idItem": 38,
+            "noArticle": "BD-50",
+            "name": "Broderie au col \"Incendie\"",
+            "points": 5,
+            "description": "Broderie col",
+            "imageUrl": "broderie_col.jpg"
+        },
+        {
+            "idItem": 39,
+            "noArticle": "8115 X NB",
+            "name": "Col cheminée manches courtes NB 3XDRY",
+            "points": 33,
+            "description": "Chemise été col montant",
+            "imageUrl": "chemise_col_courte.jpg"
+        },
+        {
+            "idItem": 40,
+            "noArticle": "BD-50",
+            "name": "Broderie au col \"Incendie\"",
+            "points": 5,
+            "description": "Broderie col été",
+            "imageUrl": "broderie_col_ete.jpg"
+        },
+        {
+            "idItem": 41,
+            "noArticle": "8130 NB",
+            "name": "Polo manches courtes (style chemise)",
+            "points": 79,
+            "description": "Polo officiel",
+            "imageUrl": "polo_chemise.jpg"
+        },
+        {
+            "idItem": 42,
+            "noArticle": "8160 NB",
+            "name": "Polo manches courtes (style chemise polyester + léger)",
+            "points": 70,
+            "description": "Polo léger",
+            "imageUrl": "polo_leger.jpg"
+        },
+        {
+            "idItem": 43,
+            "noArticle": "505E NB",
+            "name": "Chandail en laine polaire avec épaulettes",
+            "points": 109,
+            "description": "Chandail chaud avec épaulettes",
+            "imageUrl": "chandail_polaire.jpg"
+        },
+        {
+            "idItem": 44,
+            "noArticle": "BD-50",
+            "name": "Broderie au col \"Incendie\"",
+            "points": 6,
+            "description": "Broderie col polaire",
+            "imageUrl": "broderie_col_polaire.jpg"
+        },
+        {
+            "idItem": 45,
+            "noArticle": "6S030M",
+            "name": "Tuque Atech chaud/sec",
+            "points": 21,
+            "description": "Tuque technologique",
+            "imageUrl": "tuque_atech.jpg"
+        },
+        {
+            "idItem": 46,
+            "noArticle": "108085",
+            "name": "Sac de sport OGIO (avec le nom)",
+            "points": 77,
+            "description": "Sac personnalisé",
+            "imageUrl": "sac_ogio_nom.jpg"
+        },
+        {
+            "idItem": 47,
+            "noArticle": "412030",
+            "name": "Sac de sport OGIO",
+            "points": 58,
+            "description": "Sac standard",
+            "imageUrl": "sac_ogio.jpg"
+        },
+        {
+            "idItem": 48,
+            "noArticle": "Divers",
+            "name": "Personnalisé en lot",
+            "points": 5,
+            "description": "Personnalisation groupée",
+            "imageUrl": "perso_lot.jpg"
+        },
+        {
+            "idItem": 49,
+            "noArticle": "Divers",
+            "name": "Personnalisé individuellement (Nom + logo)",
+            "points": 6,
+            "description": "Personnalisation individuelle",
+            "imageUrl": "perso_individuelle.jpg"
+        },
+        {
+            "idItem": 50,
+            "noArticle": "FW3107",
+            "name": "Manteau doublé en molleton (rouge)",
+            "points": 115,
+            "description": "Manteau chaud",
+            "imageUrl": "manteau_molleton.jpg"
+        },
+        {
+            "idItem": 51,
+            "noArticle": "STXJ-2",
+            "name": "Manteau d'entraînement été (broderie ton sur ton)",
+            "points": 61,
+            "description": "Manteau léger",
+            "imageUrl": "manteau_entrainement_ete.jpg"
+        },
+        {
+            "idItem": 52,
+            "noArticle": "RWX-1",
+            "name": "Manteau d'entraînement hiver (broderie ton sur ton)",
+            "points": 100,
+            "description": "Manteau d'hiver",
+            "imageUrl": "manteau_entrainement_hiver.jpg"
+        },
+        {
+            "idItem": 53,
+            "noArticle": "FW3107",
+            "name": "Manteau doublé en molleton",
+            "points": 115,
+            "description": "Manteau confortable",
+            "imageUrl": "manteau_molleton_bleu.jpg"
+        },
+        {
+            "idItem": 54,
+            "noArticle": "STXP-2",
+            "name": "Culotte longue d'entraînement",
+            "points": 45,
+            "description": "Pantalon sport",
+            "imageUrl": "pantalon_entrainement.jpg"
+        },
+        {
+            "idItem": 55,
+            "noArticle": "Crosstech",
+            "name": "Bottes en cuir (spécifier pointure et largeur) (crédit -150 $)",
+            "points": 500,
+            "description": "Bottes professionnelles",
+            "imageUrl": "bottes_crosstech.jpg"
+        },
+        {
+            "idItem": 56,
+            "noArticle": "Haix",
+            "name": "Bottes pompier en cuir",
+            "points": 515,
+            "description": "Bottes haute résistance",
+            "imageUrl": "bottes_haix.jpg"
+        },
+        {
+            "idItem": 57,
+            "noArticle": "Badge",
+            "name": "Badge de pompier avec porte clip en cuir",
+            "points": 67,
+            "description": "Badge officiel",
+            "imageUrl": "badge_pompier.jpg"
+        },
+        {
+            "idItem": 58,
+            "noArticle": "FPDSE",
+            "name": "Guide FPDS en version électronique",
+            "points": 20,
+            "description": "Guide électronique",
+            "imageUrl": "guide_fpds.jpg"
+        },
+        {
+            "idItem": 59,
+            "noArticle": "Berg HH",
+            "name": "Salopette matelassée",
+            "points": 175,
+            "description": "Salopette d'intervention",
+            "imageUrl": "salopette_matelassee.jpg"
+        }
+    ]
+}

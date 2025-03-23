@@ -1,36 +1,58 @@
 import { Outlet, Link } from "react-router-dom";
+import { IoMdHome } from "react-icons/io";
+import { FaCartShopping } from "react-icons/fa6";
+import { RiAccountCircleFill } from "react-icons/ri";
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-red-700 flex flex-col w-full m-0 p-0 overflow-x-hidden">
-      <header className="bg-blue-900 border-b-4 border-yellow-400 shadow-lg w-screen max-w-full mx-0 px-0">
-        <nav className="w-full px-0 py-3">
-          <ul className="flex flex-wrap items-center justify-between w-full px-4">
-            <li className="flex items-center">
-              <a id="logo" href="/Home" className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
-                  <ellipse cx="22.48" cy="22.5263" rx="22.22" ry="21.7105" fill="black"></ellipse>
-                </svg>
-                <p className="text-yellow-400 text-xl font-bold ml-2">Home</p>
-              </a>
-            </li>
-            <li className="mx-2">
-              <Link to="/Administration/Catalogue" className="text-white hover:text-yellow-400 font-medium transition duration-300">Catalogue</Link>
-            </li>
-            <li className="mx-2">
-              <Link to="/kart" className="text-white hover:text-yellow-400 font-medium transition duration-300">Panier</Link>
-            </li>
-            <li className="mx-2">
-              <Link to="/Administration/Product" className="text-white hover:text-yellow-400 font-medium transition duration-300">Produit</Link>
-            </li>
-          </ul>
+    <div className="min-h-screen bg-red-700 flex flex-col w-full m-0 p-0">
+      <header className="bg-blue-900 border-b-4 border-yellow-400 shadow-lg w-full">
+        <nav className="w-full max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          {/* Section gauche : Logo + "Accueil" */}
+          <div className="flex items-center space-x-4">
+            <a id="logo" href="/Home" className="flex items-center">
+              <img
+                src="https://www.ciel103.com/medias/large/nouvelles/logo-incendie.jpg"
+                alt="Logo Service Incendie"
+                className="h-12 w-12 rounded-full object-cover" // Redimensionnement et style
+              />
+            </a>
+            <Link
+              to="/Home"
+              className="text-yellow-400 text-lg font-semibold hover:text-yellow-300 transition duration-300"
+            >
+              <IoMdHome size={30}/>
+            </Link>
+          </div>
+
+          {/* Section droite : Catalogue, Panier, Produit */}
+          <div className="flex items-center space-x-6">
+            <Link
+              to="/Home/Catalogue"
+              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+            >
+              Catalogue
+            </Link>
+            <Link
+              to="/kart"
+              className="text-yellow-400 text-base font-medium hover:text-yellow-400 transition duration-300"
+            >
+              <FaCartShopping size={30}/>
+            </Link>
+            <Link
+              to="#"
+              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+            >
+              <RiAccountCircleFill size={70}/>
+            </Link>
+          </div>
         </nav>
       </header>
 
-      <main className="flex-grow p-6 w-full">
+      <main className="flex-grow w-full bg-red-700">
         <Outlet />
       </main>
 
-      <footer className="bg-blue-900 border-t-4 border-yellow-400 py-4 text-center shadow-inner w-screen max-w-full mx-0 px-0">
+      <footer className="bg-blue-900 border-t-4 border-yellow-400 py-4 text-center shadow-inner w-full">
         <h1 className="text-yellow-400 font-bold">Footer</h1>
       </footer>
     </div>
