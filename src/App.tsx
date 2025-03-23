@@ -10,6 +10,8 @@ import Layout from './pages/Layout';
 import Kart from './pages/Kart';
 import Catalogue from './pages/Catalogue';
 import ProductDetails from './pages/ProductDetails';
+import Administration from './pages/Administration';
+import EditProduct from './pages/EditProduct';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +24,8 @@ const router = createBrowserRouter(
         <Route path="/Home" element={<Home />} />
         <Route path="/Administration/Product" element={<Product />} />
         <Route path="/Kart" element={<Kart />} />
+        <Route path="/Home/Administration/Products" element={<Administration />} />
+        <Route path="/edit-product/:idItem" element={<EditProduct />} />
         <Route path="/Home/Catalogue" element={<Catalogue />} />
         <Route path="/Products/:idItem" element={<ProductDetails />} />
       </Route>

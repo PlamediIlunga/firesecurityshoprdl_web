@@ -39,6 +39,12 @@ const Layout = () => {
               <FaCartShopping size={30}/>
             </Link>
             <Link
+              to="/Home/Administration/Products"
+              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+            >
+              Administration
+            </Link>
+            <Link
               to="#"
               className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
             >
