@@ -90,7 +90,7 @@ export default function Profil() {
                                 {/* Bouton Modifier , Ne fais pas parti de fonctionnalités réquises mais je l'ai ajouté*/}
                                 <div className="mt-8 text-center">
                                     <Link
-                                        to={`/Home/EditUser/${user.idUser}`}
+                                        to={`#`}
                                         className="inline-block bg-yellow-400 text-black font-semibold py-3 px-6 rounded-lg hover:bg-yellow-500 transition duration-300"
                                     >
                                         Modifier le Profil
