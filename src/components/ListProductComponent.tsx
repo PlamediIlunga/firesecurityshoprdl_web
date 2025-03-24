@@ -40,9 +40,9 @@ export default function ListProductComponent({ products }: { products: ProduitIt
               >
                 {/* Colonne Image */}
                 <td className="px-4 py-3 border-r border-yellow-400">
-                  {product.image ? (
+                  {product.imageUrl ? (
                     <img
-                      src={`/${product.image}`}
+                      src={`/${product.imageUrl}`}
                       className="w-16 h-16 object-cover rounded-lg"
                     />
                   ) : (
