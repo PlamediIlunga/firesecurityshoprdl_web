@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import casePostalBD from '../datas/casePostaleBD_Mock.json';
 
 export default function Catalogue() {
-  const api_url = "http://localhost:5007/";
+  //const api_url = "http://localhost:5007/";
   const [products, setProducts] = useState<ProduitItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   // État pour gérer la catégorie sélectionnée

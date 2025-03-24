@@ -2,7 +2,7 @@ import ProduitItem from '../types/ProduitItem';
 import KartProduct from '../components/ProductComponent';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import casePostalBD from '../datas/casePostaleBD_Mock.json';
+//import casePostalBD from '../datas/casePostaleBD_Mock.json';
 
 // Étendre l'interface ProduitItem pour inclure la quantité
 interface CartItem extends ProduitItem {

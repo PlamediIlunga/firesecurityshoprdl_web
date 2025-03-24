@@ -10,7 +10,7 @@ interface CartItem extends ProduitItem {
 }
 
 export default function ProductDetail() {
-  const api_url = "http://localhost:5007/";
+  //const api_url = "http://localhost:5007/";
   const [product, setProduct] = useState<ProduitItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAddedToCart, setIsAddedToCart] = useState(false); // État pour indiquer si le produit est ajouté au panier
