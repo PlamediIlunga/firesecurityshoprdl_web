@@ -24,11 +24,11 @@ export default function Product() {
           name: product.name,
           points: product.points,
           description: product.description,
-          imageUrl: product.imageUrl // Map imageUrl to image
+          imageUrl: product.imageUrl 
         })));
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
-        setProducts([]); // S'assurer que products est vide en cas d'erreur
+        setProducts([]); 
       } finally {
         setIsLoading(false);
       }

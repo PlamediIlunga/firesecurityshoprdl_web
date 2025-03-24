@@ -6,7 +6,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
     <div className="space-y-8">
       {/* Icône et nom */}
       <div className="flex flex-col items-center space-y-4">
-        <RiAccountCircleFill className="text-9xl text-yellow-400" /> {/* Icône agrandie */}
+        <RiAccountCircleFill className="text-9xl text-yellow-400" /> 
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900">
             {user.lastName} {user.name}
@@ -15,7 +15,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
         </div>
       </div>
 
-      {/* Informations personnelles (centrées) */}
+      {/* Informations personnelles */}
       <div className="space-y-2 text-center">
         <h3 className="text-lg font-semibold text-gray-700 border-b border-gray-300 pb-1 mx-auto max-w-md">
           Informations Personnelles
@@ -25,7 +25,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
         </p>
       </div>
 
-      {/* Informations de contact (centrées) */}
+      {/* Informations de contact  */}
       <div className="space-y-2 text-center">
         <h3 className="text-lg font-semibold text-gray-700 border-b border-gray-300 pb-1 mx-auto max-w-md">
           Contact
@@ -38,7 +38,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
         </p>
       </div>
 
-      {/* Points (centrés) */}
+      {/* Points */}
       <div className="space-y-2 text-center">
         <h3 className="text-lg font-semibold text-gray-700 border-b border-gray-300 pb-1 mx-auto max-w-md">
           Points

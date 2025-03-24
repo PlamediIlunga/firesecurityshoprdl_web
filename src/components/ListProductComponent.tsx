@@ -38,7 +38,7 @@ export default function ListProductComponent({ products }: { products: ProduitIt
                 key={product.idItem}
                 className="bg-gray-100 text-gray-800 border-t-2 border-yellow-400 transition duration-300 hover:bg-blue-900 hover:text-white"
               >
-                {/* Colonne Image */}
+
                 <td className="px-4 py-3 border-r border-yellow-400">
                   {product.imageUrl ? (
                     <img
@@ -50,27 +50,22 @@ export default function ListProductComponent({ products }: { products: ProduitIt
                   )}
                 </td>
 
-                {/* Colonne Nom */}
                 <td className="px-4 py-3 border-r border-yellow-400 text-lg font-medium">
                   {product.name}
                 </td>
 
-                {/* Colonne Numéro d'article */}
                 <td className="px-4 py-3 border-r border-yellow-400 text-md">
                   {product.noArticle}
                 </td>
 
-                {/* Colonne Points */}
                 <td className="px-4 py-3 border-r border-yellow-400 text-md">
                   {product.points}
                 </td>
 
-                {/* Colonne Description */}
                 <td className="px-4 py-3 border-r border-yellow-400 text-md">
                   {product.description}
                 </td>
 
-                {/* Colonne Actions */}
                 <td className="px-4 py-3">
                   <div className="flex items-center space-x-4">
                     <Link

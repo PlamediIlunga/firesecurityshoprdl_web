@@ -41,7 +41,7 @@ const Layout = () => {
             </Link>
           </div>
 
-          {/* Section droite : Catalogue, Panier, Produit */}
+          {/* Section droite : Catalogue, Panier, Produit ,Icon de compte*/}
           <div className="flex items-center space-x-6">
             <Link
               to="/Home/Contact"

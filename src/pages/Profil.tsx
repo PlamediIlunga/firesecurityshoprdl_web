@@ -5,9 +5,9 @@ import casePostalBD from '../datas/casePostaleBD_Mock.json';
 import UserComponent from '../components/UserComponent';
 
 export default function Profil() {
-    const [user, setUser] = useState<UserItem | null>(null); // Changement : un seul utilisateur, pas un tableau
+    const [user, setUser] = useState<UserItem | null>(null); 
     const [isLoading, setIsLoading] = useState(true);
-    const { idCurrentUser } = useParams<{ idCurrentUser?: string }>(); // Récupérer l'ID de l'utilisateur depuis l'URL
+    const { idCurrentUser } = useParams<{ idCurrentUser?: string }>(); 
 
     useEffect(() => {
         const getUserById = async () => {
@@ -29,7 +29,7 @@ export default function Profil() {
                             postalCode: foundUser.postalCode,
                             city: foundUser.city,
                             country: foundUser.country,
-                            password: foundUser.password, // Non affiché
+                            password: foundUser.password, 
                             points: foundUser.points,
                         });
                     } else {
@@ -87,7 +87,7 @@ export default function Profil() {
                                 {/* Informations personnelles */}
                                 <UserComponent user={user} />
 
-                                {/* Bouton Modifier , Ne fais pas parti de fonctionnalités réquises mais je l'ai ajouté*/}
+                                {/* Bouton Modifier , Ne fais pas parti de fonctionnalités réquises mais je l'ai ajouté quand même.Il ne regirige nulle part pour l'instant*/}
                                 <div className="mt-8 text-center">
                                     <Link
                                         to={`#`}
@@ -105,7 +105,7 @@ export default function Profil() {
                     </div>
                 </section>
 
-                {/* Section Historique des Commandes (Placeholder) */}
+                {/* Section Historique des Commandes */}
                 <section className="py-12 bg-red-700">
                     <div className="max-w-6xl mx-auto px-4">
                         <h2 className="text-3xl font-semibold text-center mb-8">
@@ -115,7 +115,6 @@ export default function Profil() {
                             <p className="text-center text-lg text-gray-600">
                                 Aucune commande récente. Consultez le catalogue pour échanger vos points !
                             </p>
-                            {/* Tu peux ajouter une liste de commandes ici si tu as les données */}
                         </div>
                     </div>
                 </section>
