@@ -3,7 +3,7 @@ import { CiImageOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 export default function ListProductComponent({ products }: { products: ProduitItem[] }) {
-    
+
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full border-collapse border-4 border-yellow-400">
@@ -41,7 +41,6 @@ export default function ListProductComponent({ products }: { products: ProduitIt
                                     {product.image ? (
                                         <img
                                             src={`/${product.image}`}
-                                            alt={product.name}
                                             className="w-16 h-16 object-cover rounded-lg"
                                         />
                                     ) : (
