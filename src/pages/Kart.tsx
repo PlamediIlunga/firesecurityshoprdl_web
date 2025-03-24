@@ -151,7 +151,7 @@ export default function Kart() {
                                     Total : <span className="text-yellow-400">{totalPoints} points</span>
                                 </p>
                                 <Link
-                                    to="/checkout"
+                                    to="#"
                                     className="bg-yellow-400 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition duration-300"
                                 >
                                     Valider le panier

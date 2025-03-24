@@ -23,15 +23,22 @@ const Layout = () => {
             >
               <IoMdHome size={30} />
             </Link>
-          </div>
 
-          {/* Section droite : Catalogue, Panier, Produit */}
-          <div className="flex items-center space-x-6">
             <Link
               to="/Home/Catalogue"
               className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
             >
               Catalogue
+            </Link>
+          </div>
+
+          {/* Section droite : Catalogue, Panier, Produit */}
+          <div className="flex items-center space-x-6">
+            <Link
+              to="/Home/Contact"
+              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+            >
+              Contact
             </Link>
             <Link
               to="/kart"
@@ -40,7 +47,7 @@ const Layout = () => {
               <FaCartShopping size={30} />
             </Link>
             <Link
-              to="/Home/Administration/Products"
+              to="/Home/Administration/"
               className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
             >
               Administration

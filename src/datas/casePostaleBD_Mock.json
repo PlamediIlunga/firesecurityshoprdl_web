@@ -1,4 +1,85 @@
 {
+    "ListeUser": [
+        {
+            "idUser": 1,
+            "lastName": "Tremblay",
+            "name": "Marc",
+            "email": "marc.tremblay@serviceincendie-rdl.ca",
+            "phone": "418-555-0101",
+            "adresse": "45 Rue des Pompiers",
+            "postalCode": "G5R 2T3",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "securePass123",
+            "points": 300
+        },
+        {
+            "idUser": 2,
+            "lastName": "Gagnon",
+            "name": "Sophie",
+            "email": "sophie.gagnon@serviceincendie-rdl.ca",
+            "phone": "418-555-0102",
+            "adresse": "78 Chemin de la Caserne",
+            "postalCode": "G5R 3Y4",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "fireFighter2023",
+            "points": 150
+        },
+        {
+            "idUser": 3,
+            "lastName": "Lévesque",
+            "name": "Pierre",
+            "email": "pierre.levesque@serviceincendie-rdl.ca",
+            "phone": "418-555-0103",
+            "adresse": "12 Avenue des Héros",
+            "postalCode": "G5R 1A2",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "pompier456",
+            "points": 220
+        },
+        {
+            "idUser": 4,
+            "lastName": "Dubé",
+            "name": "Émilie",
+            "email": "emilie.dube@serviceincendie-rdl.ca",
+            "phone": "418-555-0104",
+            "adresse": "56 Rue de la Flamme",
+            "postalCode": "G5R 4B5",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "safePass789",
+            "points": 180
+        },
+        {
+            "idUser": 5,
+            "lastName": "Bouchard",
+            "name": "Luc",
+            "email": "luc.bouchard@serviceincendie-rdl.ca",
+            "phone": "418-555-0105",
+            "adresse": "89 Boulevard des Sauveurs",
+            "postalCode": "G5R 5C6",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "rescue2024",
+            "points": 250
+        },
+        {
+            "idUser": 6,
+            "lastName": "Roy",
+            "name": "Isabelle",
+            "email": "isabelle.roy@serviceincendie-rdl.ca",
+            "phone": "418-555-0106",
+            "adresse": "23 Rue des Braves",
+            "postalCode": "G5R 6D7",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "fireSafe321",
+            "points": 200
+        }
+    ],
+
     "ListeProduit": [
         {
             "idItem": 1,
