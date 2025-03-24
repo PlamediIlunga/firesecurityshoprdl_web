@@ -28,7 +28,7 @@ export default function Catalogue() {
           name: product.name,
           points: product.points,
           description: product.description,
-          image: product.imageUrl // Map imageUrl to image
+          imageUrl: product.imageUrl // Map imageUrl to image
         })));
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);

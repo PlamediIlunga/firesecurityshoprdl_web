@@ -15,6 +15,7 @@ import EditProduct from './pages/EditProduct';
 import Contact from './pages/Contact';
 import User from './pages/User';
 import EditUser from './pages/EditUser';
+import Profil from './pages/Profil';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         <Route path="/Home" element={<Home />} />
         <Route path="/Home/Catalogue" element={<Catalogue />} />
         <Route path="/Home/Contact" element={<Contact />} />
+        <Route path="/Profil/:idCurrentUser" element={<Profil />} />
         <Route path="/Products/:idItem" element={<ProductDetails />} />
         <Route path="/Home/Administration/Product" element={<Product />} />
         <Route path="/Home/Administration/User" element={<User />} />

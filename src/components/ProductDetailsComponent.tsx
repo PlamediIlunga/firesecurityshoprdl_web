@@ -13,6 +13,17 @@ export default function ProductDetailsComponent({ product }: { product: ProduitI
         <span className="font-semibold">Points requis :</span>{' '}
         <span className="text-yellow-600">{product.points}</span>
       </p>
+      <p className="text-lg mb-2">
+        <span className="font-semibold">Tailles :</span>{' '}
+
+        <span className="text-yellow-600">
+          <select className="text-yellow-600"><option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option></select>
+        </span>
+      </p>
       <h3 className="text-xl font-semibold text-yellow-600 mt-4 mb-2">
         Spécifications
       </h3>

@@ -30,10 +30,9 @@ export default function ProductDetail() {
           // temporaire
           const foundProduct = casePostalBD.Products.find(product => product.idItem === parseInt(idItem, 10));
           if (foundProduct) {
-            setProduct({
-              ...foundProduct,
-              image: foundProduct.imageUrl, // Map imageUrl to image
-            });
+            setProduct(
+              foundProduct // Map imageUrl to image
+            );
           } else {
             setProduct(null);
           }
@@ -106,9 +105,9 @@ export default function ProductDetail() {
             <div className="bg-gray-100 text-gray-800 p-8 rounded-lg border-4 border-yellow-400 shadow-2xl flex flex-col md:flex-row gap-8">
               {/* Image du produit */}
               <div className="md:w-1/2">
-                {product.image ? (
+                {product.imageUrl ? (
                   <img
-                    src={`/${product.image}`}
+                    src={`/${product.imageUrl}`}
                     alt={product.name}
                     className="w-full h-96 object-cover rounded-lg shadow-md"
                   />

@@ -24,7 +24,7 @@ export default function Product() {
           name: product.name,
           points: product.points,
           description: product.description,
-          image: product.imageUrl // Map imageUrl to image
+          imageUrl: product.imageUrl // Map imageUrl to image
         })));
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
@@ -93,6 +93,7 @@ export default function Product() {
                   name="name"
                   placeholder="Ex: Bande sur manteau"
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                  required
                 />
               </div>
 
@@ -107,6 +108,7 @@ export default function Product() {
                   name="noArticle"
                   placeholder="Ex: DIV18"
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                  required
                 />
               </div>
 
@@ -122,6 +124,7 @@ export default function Product() {
                   placeholder="Ex: 18"
                   min="0"
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                  required
                 />
               </div>
 
@@ -136,6 +139,7 @@ export default function Product() {
                   placeholder="Ex: Bande réfléchissante"
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800 resize-none"
+                  required
                 />
               </div>
 
@@ -150,6 +154,7 @@ export default function Product() {
                   name="image"
                   accept="image/*"
                   className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                  required
                 />
               </div>
 

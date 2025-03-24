@@ -1,4 +1,19 @@
 {
+    "User": [
+        {
+            "idUser": 5,
+            "lastName": "Bouchard",
+            "name": "Luc",
+            "email": "luc.bouchard@serviceincendie-rdl.ca",
+            "phone": "418-555-0105",
+            "adresse": "89 Boulevard des Sauveurs",
+            "postalCode": "G5R 5C6",
+            "city": "Rivière-du-Loup",
+            "country": "Canada",
+            "password": "rescue2024",
+            "points": 250
+        }
+    ],
     "ListeUser": [
         {
             "idUser": 1,
@@ -79,7 +94,6 @@
             "points": 200
         }
     ],
-
     "ListeProduit": [
         {
             "idItem": 1,

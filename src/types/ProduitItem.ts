@@ -4,5 +4,5 @@ noArticle:string,
 name:string,
 points:number,
 description:string,
-image:string
+imageUrl:string
 }

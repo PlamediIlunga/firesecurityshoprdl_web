@@ -98,6 +98,7 @@ export default function User() {
                                     name="lastName"
                                     placeholder="Ex: Doe"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -112,6 +113,7 @@ export default function User() {
                                     name="name"
                                     placeholder="Ex: John"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -126,6 +128,7 @@ export default function User() {
                                     name="email"
                                     placeholder="Ex: john.doe@example.com"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -140,6 +143,7 @@ export default function User() {
                                     name="phone"
                                     placeholder="Ex: 418-555-1234"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -154,6 +158,7 @@ export default function User() {
                                     name="adresse"
                                     placeholder="Ex: 123 Rue des Pompiers"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -168,6 +173,7 @@ export default function User() {
                                     name="postalCode"
                                     placeholder="Ex: G5R 0A1"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -182,6 +188,7 @@ export default function User() {
                                     name="city"
                                     placeholder="Ex: Rivière-du-Loup"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -196,6 +203,7 @@ export default function User() {
                                     name="country"
                                     placeholder="Ex: Canada"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 
@@ -211,6 +219,7 @@ export default function User() {
                                     placeholder="Ex: 150"
                                     min="0"
                                     className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
+                                    required
                                 />
                             </div>
 

@@ -2,8 +2,17 @@ import { Outlet, Link } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { RiAccountCircleFill } from "react-icons/ri";
+import { useState } from "react"; 
 
 const Layout = () => {
+  // État pour gérer l'affichage du dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Fonction pour basculer l'état du dropdown
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className="min-h-screen bg-red-700 flex flex-col w-full m-0 p-0">
       <header className="bg-blue-900 border-b-4 border-yellow-400 shadow-lg w-full">
@@ -14,7 +23,7 @@ const Layout = () => {
               <img
                 src="https://www.ciel103.com/medias/large/nouvelles/logo-incendie.jpg"
                 alt="Logo Service Incendie"
-                className="h-12 w-12 rounded-full object-cover" // Redimensionnement et style
+                className="h-12 w-12 rounded-full object-cover"
               />
             </a>
             <Link
@@ -52,12 +61,65 @@ const Layout = () => {
             >
               Administration
             </Link>
-            <Link
-              to="#"
-              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-            >
-              <RiAccountCircleFill size={70} />
-            </Link>
+
+            {/* Dropdown utilisateur */}
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="text-white hover:text-yellow-400 transition duration-300 focus:outline-none"
+              >
+                <RiAccountCircleFill size={70} />
+              </button>
+
+              {/* Dropdown menu */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-blue-900 border border-yellow-400 rounded-lg shadow-lg z-50">
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-white font-semibold">
+                      Speedy Gonzalesss
+                    </span>
+                    <span className="block text-sm text-gray-300 truncate">
+                      speedy@flowbite.com
+                    </span>
+                  </div>
+                  <ul className="py-2">
+                    <li>
+                      <Link
+                      //Hardcodé pour que ce soit fonctionnerl , À changer plus tard
+                        to="/Profil/5"
+                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
+                      >
+                        Profil
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
+                      >
+                        Paramètres
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
+                      >
+                        Points
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
+                      >
+                        Deconnexion
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </header>
