@@ -1,21 +1,39 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom'; // Ajout de useParams et Link
 import UserItem from '../types/UserItem';
-import casePostalBD from '../datas/casePostaleBD_Mock.json';
+//import casePostalBD from '../datas/casePostaleBD_Mock.json';
 import UserComponent from '../components/UserComponent';
 
 export default function Profil() {
-    const [user, setUser] = useState<UserItem | null>(null); 
+    const [user, setUser] = useState<UserItem | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const { idCurrentUser } = useParams<{ idCurrentUser?: string }>(); 
+    const { idUser } = useParams<{ idUser?: string }>(); 
+    const api_url = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const getUserById = async () => {
-            if (idCurrentUser) {
+
+            const token = localStorage.getItem('bearerToken');
+            if (idUser) {
                 try {
                     setIsLoading(true);
+                    const response = await fetch(`${api_url}api/User/GetUserById/${idUser}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'authorization': `Bearer ${token}`,
+                        },
+                    });
+                    console.log(response);
+                    if (!response.ok) {
+                        throw new Error("Erreur lors de la récupération de l'utilisateur");
+                    }
+                    const user: UserItem = await response.json();
+                    setUser(user);
+                    console.log(idUser);
+
                     // Simulation avec les données mockées
-                    const foundUser = casePostalBD.ListeUser.find(
+                    /*const foundUser = casePostalBD.ListeUser.find(
                         (user) => user.idUser === parseInt(idCurrentUser, 10)
                     );
                     if (foundUser) {
@@ -34,7 +52,7 @@ export default function Profil() {
                         });
                     } else {
                         setUser(null);
-                    }
+                    }*/
                 } catch (error) {
                     console.error("Erreur lors de la récupération de l'utilisateur :", error);
                     setUser(null);
@@ -44,7 +62,7 @@ export default function Profil() {
             }
         };
         getUserById();
-    }, [idCurrentUser]);
+    }, [idUser]);
 
     return (
         <div className="min-h-screen bg-red-800 text-white flex flex-col">

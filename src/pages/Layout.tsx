@@ -1,23 +1,45 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { RiAccountCircleFill } from "react-icons/ri";
-import { useState } from "react"; 
+import { useState, useEffect } from "react";
+import { jwtDecode } from 'jwt-decode';
 
 const Layout = () => {
-  // État pour gérer l'affichage du dropdown
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [decodedToken, setDecodedToken] = useState<{ email: string; role: string, idUser: string } | null>(null);
+  const navigate = useNavigate();
 
-  // Fonction pour basculer l'état du dropdown
+  useEffect(() => {
+    const bearerToken = localStorage.getItem('bearerToken');
+    if (bearerToken) {
+      try {
+        // Si le claim est "Role" (majuscule), utilisez : { email: string; Role: string }
+        const payload = jwtDecode<{ email: string; role: string, idUser: string }>(bearerToken);
+        console.log(payload);
+        setDecodedToken(payload);
+      } catch (error) {
+        console.error('Erreur lors du décodage du token:', error);
+        setDecodedToken(null);
+      }
+    }
+  }, []);
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('bearerToken');
+    setDecodedToken(null);
+    setIsDropdownOpen(false);
+    navigate('/');
   };
 
   return (
     <div className="min-h-screen bg-red-700 flex flex-col w-full m-0 p-0">
       <header className="bg-blue-900 border-b-4 border-yellow-400 shadow-lg w-full">
         <nav className="w-full max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Section gauche : Logo + "Accueil" */}
           <div className="flex items-center space-x-4">
             <a id="logo" href="/Home" className="flex items-center">
               <img
@@ -32,7 +54,6 @@ const Layout = () => {
             >
               <IoMdHome size={30} />
             </Link>
-
             <Link
               to="/Home/Catalogue"
               className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
@@ -41,7 +62,6 @@ const Layout = () => {
             </Link>
           </div>
 
-          {/* Section droite : Catalogue, Panier, Produit ,Icon de compte*/}
           <div className="flex items-center space-x-6">
             <Link
               to="/Home/Contact"
@@ -55,14 +75,14 @@ const Layout = () => {
             >
               <FaCartShopping size={30} />
             </Link>
-            <Link
-              to="/Home/Administration/"
-              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-            >
-              Administration
-            </Link>
-
-            {/* Dropdown utilisateur */}
+            {decodedToken?.role === "Admin" ? ( // Si claim est "Role", utilisez decodedToken?.Role
+              <Link
+                to="/Home/Administration/"
+                className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+              >
+                Administration
+              </Link>
+            ) : null}
             <div className="relative">
               <button
                 onClick={toggleDropdown}
@@ -71,22 +91,20 @@ const Layout = () => {
                 <RiAccountCircleFill size={70} />
               </button>
 
-              {/* Dropdown menu */}
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-blue-900 border border-yellow-400 rounded-lg shadow-lg z-50">
                   <div className="px-4 py-3">
                     <span className="block text-sm text-white font-semibold">
-                      Speedy Gonzalesss
+                      {decodedToken?.email ? decodedToken.email.split('@')[0] : 'Non connecté'}
                     </span>
                     <span className="block text-sm text-gray-300 truncate">
-                      speedy@flowbite.com
+                      {decodedToken?.role === "Admin" ? 'Administrateur' : 'Utilisateur'} {/* Si claim est "Role", utilisez decodedToken?.Role */}
                     </span>
                   </div>
                   <ul className="py-2">
                     <li>
                       <Link
-                      //Hardcodé pour que ce soit fonctionnerl , À changer plus tard
-                        to="/Profil/5"
+                        to={`/Profil/${decodedToken?.idUser}`}
                         className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
                       >
                         Profil
@@ -109,12 +127,12 @@ const Layout = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
                       >
-                        Deconnexion
-                      </Link>
+                        Déconnexion
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -130,7 +148,6 @@ const Layout = () => {
 
       <footer className="bg-blue-900 border-t-4 border-yellow-400 py-6 text-center shadow-inner w-full">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Informations de l'organisation */}
           <div className="text-white mb-4">
             <h2 className="text-xl font-bold text-yellow-400 mb-2">
               Service Incendie Rivière-du-Loup
@@ -149,7 +166,6 @@ const Layout = () => {
             </p>
           </div>
 
-          {/* Liens utiles */}
           <div className="flex justify-center space-x-6 mb-4">
             <Link
               to="#"
@@ -171,7 +187,6 @@ const Layout = () => {
             </Link>
           </div>
 
-          {/* Copyright */}
           <div className="text-yellow-400 text-sm">
             © 2025 Plamedi Ilunga. Tous droits réservés.
           </div>

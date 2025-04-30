@@ -2,40 +2,45 @@ import ProduitItem from '../types/ProduitItem';
 import MyProduct from '../components/ProductDetailsComponent';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import casePostalBD from '../datas/casePostaleBD_Mock.json';
 
-// Étendre l'interface ProduitItem pour inclure la quantité
 interface CartItem extends ProduitItem {
   quantity: number;
 }
 
 export default function ProductDetail() {
-  //const api_url = "http://localhost:5007/";
+  const api_url = import.meta.env.VITE_API_URL;
   const [product, setProduct] = useState<ProduitItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAddedToCart, setIsAddedToCart] = useState(false); // État pour indiquer si le produit est ajouté au panier
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { idItem } = useParams<{ idItem?: string }>();
 
   useEffect(() => {
     const getProductById = async () => {
+
+      const token = localStorage.getItem('bearerToken');
+      // Récupération du bearer token
+      if (!token) {
+        console.error("Token non trouvé dans le localStorage");
+        return;
+      }
+
       if (idItem) {
         try {
           setIsLoading(true);
-          /*const response = await fetch(`${api_url}api/Item/GetItemById?id=${idItem}`);
+          const response = await fetch(`${api_url}api/Item/GetItemById/${idItem}`
+            , {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`,
+              },
+            }
+          );
           if (!response.ok) {
             throw new Error("Erreur lors de la récupération du produit");
           }
           const product: ProduitItem = await response.json();
-          setProduct(product);*/
-          // temporaire
-          const foundProduct = casePostalBD.Products.find(product => product.idItem === parseInt(idItem, 10));
-          if (foundProduct) {
-            setProduct(
-              foundProduct // Map imageUrl to image
-            );
-          } else {
-            setProduct(null);
-          }
+          setProduct(product);
         } catch (error) {
           console.error("Erreur lors de la récupération du produit :", error);
         } finally {
@@ -51,10 +56,10 @@ export default function ProductDetail() {
     if (product) {
       // Récupérer le panier actuel depuis localStorage
       const currentCart: CartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
-      
+
       // Vérifier si le produit existe déjà dans le panier
       const existingProductIndex = currentCart.findIndex(item => item.idItem === product.idItem);
-      
+
       let updatedCart: CartItem[];
       if (existingProductIndex !== -1) {
         // Si le produit existe, augmenter sa quantité
@@ -129,11 +134,10 @@ export default function ProductDetail() {
                   <button
                     onClick={addToCart}
                     disabled={isAddedToCart}
-                    className={`w-full py-4 rounded-lg font-semibold text-lg transition duration-300 ${
-                      isAddedToCart
-                        ? 'bg-green-500 text-white cursor-not-allowed'
-                        : 'bg-yellow-400 text-gray-800 hover:bg-yellow-500'
-                    }`}
+                    className={`w-full py-4 rounded-lg font-semibold text-lg transition duration-300 ${isAddedToCart
+                      ? 'bg-green-500 text-white cursor-not-allowed'
+                      : 'bg-yellow-400 text-gray-800 hover:bg-yellow-500'
+                      }`}
                   >
                     {isAddedToCart ? 'Ajouté au panier !' : 'Ajouter au panier'}
                   </button>

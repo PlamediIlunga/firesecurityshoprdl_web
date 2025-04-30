@@ -2,34 +2,37 @@ import ProduitItem from '../types/ProduitItem';
 import MyProducts from '../components/ProductComponent';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import casePostalBD from '../datas/casePostaleBD_Mock.json';
 
 export default function Catalogue() {
-  //const api_url = "http://localhost:5007/";
   const [products, setProducts] = useState<ProduitItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // État pour gérer la catégorie sélectionnée
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+
+  const api_url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getProducts = async () => {
+      const token = localStorage.getItem('bearerToken');
+      if (!token) {
+        console.error("Token non trouvé dans le localStorage");
+        return;
+      }
+
       try {
         setIsLoading(true);
-        /*const response = await fetch(api_url + "api/Item/GetAllItem");
+        const response = await fetch(`${api_url}api/Item/GetAllItem`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+          },
+        });
+
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération des produits");
         }
         const products: ProduitItem[] = await response.json();
-        setProducts(products);*/
-        // temporaire
-        setProducts(casePostalBD.Products.map(product => ({
-          idItem: product.idItem,
-          noArticle: product.noArticle,
-          name: product.name,
-          points: product.points,
-          description: product.description,
-          imageUrl: product.imageUrl // Map imageUrl to image
-        })));
+        setProducts(products);
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
       } finally {
@@ -39,15 +42,13 @@ export default function Catalogue() {
     getProducts();
   }, []);
 
-  // Fonction pour gérer le changement de catégorie
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
-    setSelectedCategory(category); // Met à jour la catégorie sélectionnée
+    setSelectedCategory(category);
   };
 
   return (
     <div className="min-h-screen bg-red-900 text-white">
-      {/* Section avec le dropdown des catégories */}
       <div className="flex justify-end max-w-7xl mx-auto px-4 pt-6">
         <div className="relative inline-block">
           <select
@@ -59,9 +60,7 @@ export default function Catalogue() {
             <option value="Équipements">Équipements</option>
             <option value="Accessoires">Accessoires</option>
             <option value="Autres">Autres</option>
-            {/* Les options seront ajoutées par vous */}
           </select>
-          {/* Flèche personnalisée pour le dropdown */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <svg
               className="w-4 h-4 text-yellow-400"
@@ -76,7 +75,6 @@ export default function Catalogue() {
         </div>
       </div>
 
-      {/* En-tête de la page */}
       <header className="py-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Catalogue des Produits
@@ -85,7 +83,6 @@ export default function Catalogue() {
           <p className="text-lg md:text-xl">
             Découvrez notre sélection d’équipements et de vêtements pour les pompiers de Rivière-du-Loup. Échangez vos points pour des produits de qualité adaptés à vos besoins !
           </p>
-          {/* Champ de titre pour la catégorie sélectionnée */}
           {selectedCategory && (
             <h2 className="text-2xl font-semibold text-yellow-400 mt-4 text-left">
               Catégorie : {selectedCategory}
@@ -94,7 +91,6 @@ export default function Catalogue() {
         </div>
       </header>
 
-      {/* Section des produits */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4">
           {isLoading ? (

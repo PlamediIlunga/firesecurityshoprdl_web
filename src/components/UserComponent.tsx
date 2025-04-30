@@ -9,7 +9,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
         <RiAccountCircleFill className="text-9xl text-yellow-400" /> 
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900">
-            {user.lastName} {user.name}
+            {user.lastName} {user.firstName}
           </h2>
           <p className="text-gray-600">Membre du Service Incendie</p>
         </div>
@@ -21,7 +21,7 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
           Informations Personnelles
         </h3>
         <p className="text-gray-800">
-          <span className="font-medium">Adresse :</span> {user.adresse}, {user.city}, {user.postalCode}, {user.country}
+          <span className="font-medium">Adresse :</span> {user.address}, {user.city}, {user.country}
         </p>
       </div>
 
@@ -32,9 +32,6 @@ export default function UserProfileComponent({ user }: { user: UserItem }) {
         </h3>
         <p className="text-gray-800">
           <span className="font-medium">Email :</span> {user.email}
-        </p>
-        <p className="text-gray-800">
-          <span className="font-medium">Téléphone :</span> {user.phone}
         </p>
       </div>
 
