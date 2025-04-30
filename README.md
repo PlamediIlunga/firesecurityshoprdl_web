@@ -5,21 +5,6 @@
 npm create vite@latest firesecurityrdlshop -- --template react-ts
 cd firesecurityrdlshop
 ```
-
-## Démarrage du projet
-```bash
-npm install
-npm run dev
-```
-
-## Associer à mon repos git de mon organisation
-- `git init`
-- `git remote add origin https://github.com/votre-organisation/nom-repo.git`
-- `git add .`
-- `git commit -m "Initial commit"`
-- `git branch -M main`
-- `git push -u origin main`
-
 ## Instructions pour installer et exécuter le code
 
 ### Prérequis
@@ -49,6 +34,20 @@ VITE_API_URL = "mon adresse api".
    npm run dev
 ```
 2. Ouvrez votre navigateur et accédez à `http://localhost:5173` (port par défaut de Vite, sauf si modifié dans `vite.config.ts`).
+
+## Démarrage du projet
+```bash
+npm run dev
+```
+
+## Associer à mon repos git de mon organisation
+- `git init`
+- `git remote add origin https://github.com/votre-organisation/nom-repo.git`
+- `git add .`
+- `git commit -m "Initial commit"`
+- `git branch -M main`
+- `git push -u origin main`
+
 
 ### Build pour la production
 1. Créez une version optimisée pour la production :
