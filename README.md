@@ -40,7 +40,8 @@ npm run dev
 ```bash
    npm install jwt-decode  match-sorter react-icons react-router-dom 
 ```
-4. (Optionnel) Si vous utilisez un backend local, assurez-vous qu’il est démarré et écoute sur `http://localhost:5007/`. Consultez la documentation du backend pour ses instructions de configuration.
+4. (Optionnel) Pour le backend , configurez un .env en y mettant : 
+VITE_API_URL = "mon adresse api".
 
 ### Exécution
 1. Lancez le serveur de développement :
