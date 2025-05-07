@@ -8,8 +8,9 @@ export default function EditProduct() {
   const [isSubmitted, setIsSubmitted] = useState(false); // Track submission success
   const [imageUrlError, setImageUrlError] = useState<string | null>(null); // Track image URL validation error
   const { idItem } = useParams<{ idItem?: string }>();
-  const api_url = import.meta.env.VITE_API_URL;
-
+  
+  //const api_url = import.meta.env.VITE_API_URL;
+  const api_url = 'http://localhost:5007/'
   // Charger le produit au montage
   useEffect(() => {
     const getProductById = async () => {

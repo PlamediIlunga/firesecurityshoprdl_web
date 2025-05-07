@@ -18,7 +18,8 @@ export default function EditUser() {
     country: '',
   });
   const { idUser } = useParams<{ idUser?: string }>();
-  const api_url = import.meta.env.VITE_API_URL;
+  //const api_url = import.meta.env.VITE_API_URL;
+  const api_url = 'http://localhost:5007/'
   const MAX_LENGTH = 200; // Limite de 200 caractères
 
   useEffect(() => {

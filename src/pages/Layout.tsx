@@ -14,7 +14,6 @@ const Layout = () => {
     const bearerToken = localStorage.getItem('bearerToken');
     if (bearerToken) {
       try {
-        // Si le claim est "Role" (majuscule), utilisez : { email: string; Role: string }
         const payload = jwtDecode<{ email: string; role: string, idUser: string }>(bearerToken);
         console.log(payload);
         setDecodedToken(payload);

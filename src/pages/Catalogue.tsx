@@ -8,7 +8,8 @@ export default function Catalogue() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
-  const api_url = import.meta.env.VITE_API_URL;
+  const api_url = 'http://localhost:5007/'
+  //const api_url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getProducts = async () => {

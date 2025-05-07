@@ -3,12 +3,15 @@ import { useParams, Link } from 'react-router-dom'; // Ajout de useParams et Lin
 import UserItem from '../types/UserItem';
 //import casePostalBD from '../datas/casePostaleBD_Mock.json';
 import UserComponent from '../components/UserComponent';
+export let idCurrentUser = 0; // Variable globale pour stocker l'ID de l'utilisateur connecté
 
 export default function Profil() {
     const [user, setUser] = useState<UserItem | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const { idUser } = useParams<{ idUser?: string }>(); 
-    const api_url = import.meta.env.VITE_API_URL;
+    //const api_url = import.meta.env.VITE_API_URL;
+    const api_url = 'http://localhost:5007/'
+     idCurrentUser = parseInt(idUser || '0');
 
     useEffect(() => {
         const getUserById = async () => {

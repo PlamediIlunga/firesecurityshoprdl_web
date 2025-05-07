@@ -16,7 +16,8 @@ export default function Product() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false); // Track submission success
   const [imageUrlError, setImageUrlError] = useState<string | null>(null); // Track image URL validation error
-  const api_url = import.meta.env.VITE_API_URL;
+  //const api_url = import.meta.env.VITE_API_URL;
+  const api_url = 'http://localhost:5007/'
 
   const token = localStorage.getItem('bearerToken');
     const getProducts = async () => {
