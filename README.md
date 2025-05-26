@@ -1,7 +1,7 @@
 # Documentation du projet FireSecurityRDLShop
-Auteur : PLAMEDI ILUNGA ILUNGA
-version : 1.0.0
-Date : 26/05/2024
+- Auteur : PLAMEDI ILUNGA ILUNGA
+- version : 1.0.0
+- Date : 26/05/2024
 
 ## Description du projet
 
