@@ -10,7 +10,7 @@ export default function Login() {
   const [decodedToken, setDecodedToken] = useState<{ idUser?: number; isAdministrator?: boolean } | null>(null);
   const navigate = useNavigate();
   const api_url = import.meta.env.VITE_API_URL;
-  //const api_url = 'http://localhost:5007/';
+  //const api_url = 'https://firemanshoprdlapi.merdyspeed.ca/';
 
   useEffect(() => {
     const fetchUsers = async () => {
