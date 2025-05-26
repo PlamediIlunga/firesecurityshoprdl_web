@@ -3,23 +3,15 @@ import MyProduct from '../components/ProductDetailsComponent';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-interface CartItem extends ProduitItem {
-  quantity: number;
-}
-
 export default function ProductDetail() {
   const api_url = import.meta.env.VITE_API_URL;
-  //const api_url = 'http://localhost:5007/'
   const [product, setProduct] = useState<ProduitItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { idItem } = useParams<{ idItem?: string }>();
 
   useEffect(() => {
     const getProductById = async () => {
-
       const token = localStorage.getItem('bearerToken');
-      // Récupération du bearer token
       if (!token) {
         console.error("Token non trouvé dans le localStorage");
         return;
@@ -28,15 +20,13 @@ export default function ProductDetail() {
       if (idItem) {
         try {
           setIsLoading(true);
-          const response = await fetch(`${api_url}api/Item/GetItemById/${idItem}`
-            , {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await fetch(`${api_url}api/Item/GetItemById/${idItem}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${token}`,
+            },
+          });
           if (!response.ok) {
             throw new Error("Erreur lors de la récupération du produit");
           }
@@ -50,39 +40,7 @@ export default function ProductDetail() {
       }
     };
     getProductById();
-  }, [idItem]);
-
-  // Fonction pour ajouter au panier
-  const addToCart = () => {
-    if (product) {
-      // Récupérer le panier actuel depuis localStorage
-      const currentCart: CartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
-
-      // Vérifier si le produit existe déjà dans le panier
-      const existingProductIndex = currentCart.findIndex(item => item.idItem === product.idItem);
-
-      let updatedCart: CartItem[];
-      if (existingProductIndex !== -1) {
-        // Si le produit existe, augmenter sa quantité
-        updatedCart = currentCart.map((item, index) => {
-          if (index === existingProductIndex) {
-            return { ...item, quantity: item.quantity + 1 };
-          }
-          return item;
-        });
-      } else {
-        // Si le produit n'existe pas, l'ajouter avec une quantité de 1
-        const productWithQuantity: CartItem = { ...product, quantity: 1 };
-        updatedCart = [...currentCart, productWithQuantity];
-      }
-
-      // Mettre à jour localStorage
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      setIsAddedToCart(true);
-      // Réinitialiser l'état après 2 secondes pour permettre un nouvel ajout
-      setTimeout(() => setIsAddedToCart(false), 2000);
-    }
-  };
+  }, [idItem, api_url]);
 
   return (
     <div className="min-h-screen bg-red-900 text-white">
@@ -108,42 +66,8 @@ export default function ProductDetail() {
               Chargement du produit...
             </div>
           ) : product ? (
-            <div className="bg-gray-100 text-gray-800 p-8 rounded-lg border-4 border-yellow-400 shadow-2xl flex flex-col md:flex-row gap-8">
-              {/* Image du produit */}
-              <div className="md:w-1/2">
-                {product.imageUrl ? (
-                  <img
-                    src={`/${product.imageUrl}`}
-                    alt={product.name}
-                    className="w-full h-96 object-cover rounded-lg shadow-md"
-                  />
-                ) : (
-                  <div className="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg shadow-md">
-                    <span className="text-gray-500 text-xl">Aucune image disponible</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Détails du produit */}
-              <div className="md:w-1/2 flex flex-col justify-between">
-                <div>
-                  <MyProduct product={product} />
-                </div>
-
-                {/* Bouton Ajouter au panier */}
-                <div className="mt-6">
-                  <button
-                    onClick={addToCart}
-                    disabled={isAddedToCart}
-                    className={`w-full py-4 rounded-lg font-semibold text-lg transition duration-300 ${isAddedToCart
-                      ? 'bg-green-500 text-white cursor-not-allowed'
-                      : 'bg-yellow-400 text-gray-800 hover:bg-yellow-500'
-                      }`}
-                  >
-                    {isAddedToCart ? 'Ajouté au panier !' : 'Ajouter au panier'}
-                  </button>
-                </div>
-              </div>
+            <div className="bg-gray-100 text-gray-800 p-8 rounded-lg border-4 border-yellow-400 shadow-2xl">
+              <MyProduct product={product} />
             </div>
           ) : (
             <p className="text-center text-lg">Produit non trouvé.</p>
