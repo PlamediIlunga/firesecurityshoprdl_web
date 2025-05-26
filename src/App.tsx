@@ -14,6 +14,7 @@ import Administration from './pages/Administration';
 import EditProduct from './pages/EditProduct';
 import Contact from './pages/Contact';
 import User from './pages/User';
+import Orders from './pages/Order';
 import EditUser from './pages/EditUser';
 import Profil from './pages/Profil';
 
@@ -32,6 +33,8 @@ const router = createBrowserRouter(
         <Route path="/Products/:idItem" element={<ProductDetails />} />
         <Route path="/Home/Administration/Product" element={<Product />} />
         <Route path="/Home/Administration/User" element={<User />} />
+        <Route path="/Home/Administration/Order" element={<Orders />} />
+        <Route path="/Home/Order" element={<Orders />} />
         <Route path="/Kart" element={<Kart />} />
         <Route path="/Home/Administration" element={<Administration />} />
         <Route path="/edit-product/:idItem" element={<EditProduct />} />

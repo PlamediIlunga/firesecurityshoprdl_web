@@ -74,6 +74,7 @@ const Layout = () => {
             >
               <FaCartShopping size={30} />
             </Link>
+
             {decodedToken?.role === "Admin" ? ( // Si claim est "Role", utilisez decodedToken?.Role
               <Link
                 to="/Home/Administration/"
@@ -81,7 +82,14 @@ const Layout = () => {
               >
                 Administration
               </Link>
-            ) : null}
+            ) : (
+              <Link
+                to="/Home/Order/"
+                className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
+              >
+                Commandes
+              </Link>
+            )}
             <div className="relative">
               <button
                 onClick={toggleDropdown}

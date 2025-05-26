@@ -26,7 +26,7 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <img
-                src="https://images.unsplash.com/photo-1596229762336-0f9b1d4e8a15?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3"
+                src="https://thumbs.dreamstime.com/z/sapeur-pompier-icons-set-de-profession-avec-l-%C3%A9quipement-de-sapeurs-pompiers-77815884.jpg"
                 alt="Équipements de pompiers"
                 className="w-full h-64 object-cover rounded-lg shadow-lg"
               />
