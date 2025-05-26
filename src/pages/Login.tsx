@@ -71,13 +71,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-red-900 flex items-center justify-center p-6">
-      <div className="hidden">
-        {users.map((user) => (
-          <div key={user.idUser}>
-            {user.username} - {user.email}
-          </div>
-        ))}
-      </div>
+
       <div className="bg-blue-900 rounded-lg border-4 border-yellow-400 p-8 w-full max-w-md shadow-xl">
         <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Connexion</h1>
         <div className="space-y-4">
