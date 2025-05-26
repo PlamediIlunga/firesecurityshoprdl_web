@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import UserModel from '../modeles/usersModel';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
