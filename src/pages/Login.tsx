@@ -13,24 +13,7 @@ export default function Login() {
   //const api_url = 'https://firemanshoprdlapi.merdyspeed.ca/';
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(api_url + "/api/User/GetAllUser", {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('bearerToken')}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des utilisateurs:', error);
-      }
-    };
-    fetchUsers();
+    
   }, []);
 
   const login = async (email: string, password: string) => {
