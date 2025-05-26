@@ -15,7 +15,7 @@ export default function Login() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(api_url + "api/User/GetAllUser", {
+        const response = await fetch(api_url + "/api/User/GetAllUser", {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('bearerToken')}`,
@@ -35,7 +35,7 @@ export default function Login() {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch(api_url + "api/Auth/login", {
+      const response = await fetch(api_url + "/api/Auth/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

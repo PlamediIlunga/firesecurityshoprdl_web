@@ -20,7 +20,7 @@ export default function ProductDetail() {
       if (idItem) {
         try {
           setIsLoading(true);
-          const response = await fetch(`${api_url}api/Item/GetItemById/${idItem}`, {
+          const response = await fetch(`${api_url}/api/Item/GetItemById/${idItem}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

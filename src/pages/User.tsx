@@ -34,7 +34,7 @@ export default function User() {
   const getUsers = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(api_url + "api/User/GetAllUser", {
+      const response = await fetch(api_url + "/api/User/GetAllUser", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export default function User() {
     const form = e.target as HTMLFormElement;
     if (form.checkValidity() && !errors.email && !errors.password) {
       try {
-        const response = await fetch(api_url + "api/User/CreateUser", {
+        const response = await fetch(api_url + "/api/User/CreateUser", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

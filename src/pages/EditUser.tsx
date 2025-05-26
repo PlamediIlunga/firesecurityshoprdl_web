@@ -134,7 +134,7 @@ export default function EditUser() {
       try {
         const token = localStorage.getItem('bearerToken');
         if (!token) throw new Error('Token d’authentification manquant.');
-        const response = await fetch(`${api_url}api/User/UpdateUser`, {
+        const response = await fetch(`${api_url}/api/User/UpdateUser`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

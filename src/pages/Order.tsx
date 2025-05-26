@@ -47,13 +47,13 @@ export default function Orders() {
 
         let response: Response;
         if (decodedToken.role === "User") {
-          response = await fetch(`${api_url}api/Order/GetOrderByUserId/${idUser}`, {
+          response = await fetch(`${api_url}/api/Order/GetOrderByUserId/${idUser}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
         } else if (decodedToken.role === "Admin") {
-          response = await fetch(`${api_url}api/Order/GetAllOrders`, {
+          response = await fetch(`${api_url}/api/Order/GetAllOrders`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

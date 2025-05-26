@@ -27,7 +27,7 @@ export default function Product() {
       }
       try {
         setIsLoading(true);
-        const response = await fetch(api_url + 'api/Item/GetAllItem', {
+        const response = await fetch(api_url + '/api/Item/GetAllItem', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default function Product() {
     }
 
     try {
-      const response = await fetch(api_url + 'api/Item/CreateItem', {
+      const response = await fetch(api_url + '/api/Item/CreateItem', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

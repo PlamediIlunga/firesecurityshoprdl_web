@@ -12,7 +12,7 @@ export default function ListProductComponent({ products, refreshProducts }: List
 
   const deleteProduct = async (idItem: number) => {
     try {
-      const response = await fetch(`${api_url}api/Item/ArchiveItem/?id=${idItem}`, {
+      const response = await fetch(`${api_url}/api/Item/ArchiveItem/?id=${idItem}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

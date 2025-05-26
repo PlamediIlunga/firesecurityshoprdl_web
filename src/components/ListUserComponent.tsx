@@ -12,7 +12,7 @@ export default function ListUserComponent({ users, refreshUsers }: ListUserCompo
 
   const deleteUser = async (idUser: number) => {
     try {
-      const response = await fetch(`${api_url}api/User/ArchiveUser/?id=${idUser}`, {
+      const response = await fetch(`${api_url}/api/User/ArchiveUser/?id=${idUser}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

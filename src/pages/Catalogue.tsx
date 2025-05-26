@@ -21,7 +21,7 @@ export default function Catalogue() {
 
       try {
         setIsLoading(true);
-        const response = await fetch(`${api_url}api/Item/GetAllItem`, {
+        const response = await fetch(`${api_url}/api/Item/GetAllItem`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

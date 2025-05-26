@@ -20,7 +20,7 @@ export default function Profil() {
             if (idUser) {
                 try {
                     setIsLoading(true);
-                    const response = await fetch(`${api_url}api/User/GetUserById/${idUser}`, {
+                    const response = await fetch(`${api_url}/api/User/GetUserById/${idUser}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
