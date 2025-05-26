@@ -6,8 +6,8 @@ export default function User() {
   const [users, setUsers] = useState<UserItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false); // Track submission success
-  //const api_url = import.meta.env.VITE_API_URL;
-  const api_url = 'http://localhost:5007/'
+  const api_url = import.meta.env.VITE_API_URL;
+  //const api_url = 'http://localhost:5007/'
 
   const [user, setUser] = useState<UserItem>({
     idUser: 0,

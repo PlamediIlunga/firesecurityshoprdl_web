@@ -9,7 +9,8 @@ interface CartItem extends ProduitItem {
 }
 
 export default function Kart() {
-    const api_url = 'http://localhost:5007/';
+    const api_url = import.meta.env.VITE_API_URL ; // Utiliser l'URL de l'API depuis les variables d'environnement
+    //const api_url = 'http://localhost:5007/';
     const token = localStorage.getItem('bearerToken');
     const [products, setProducts] = useState<CartItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);

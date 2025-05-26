@@ -9,8 +9,8 @@ export default function Login() {
   const [users, setUsers] = useState<UserModel[]>([]);
   const [decodedToken, setDecodedToken] = useState<{ idUser?: number; isAdministrator?: boolean } | null>(null);
   const navigate = useNavigate();
-  //const api_url = import.meta.env.VITE_API_URL;
-  const api_url = 'http://localhost:5007/';
+  const api_url = import.meta.env.VITE_API_URL;
+  //const api_url = 'http://localhost:5007/';
 
   useEffect(() => {
     const fetchUsers = async () => {

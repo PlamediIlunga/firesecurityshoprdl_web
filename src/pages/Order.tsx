@@ -1,11 +1,12 @@
-import Order, { OrderItem } from "../types/OrderItem";
+import Order from "../types/OrderItem";
 import OrderComponent from "../components/OrderComponent";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 export default function Orders() {
-  const api_url = "http://localhost:5007/";
+  const api_url = import.meta.env.VITE_API_URL ; // Utiliser l'URL de l'API depuis les variables d'environnement
+  //const api_url = "http://localhost:5007/";
   const token = localStorage.getItem("bearerToken");
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
