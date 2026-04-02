@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$color-dark:       #2a2420;
+$color-dark-mid:   #3d3530;
+$color-gold:       #c9a96e;
+$color-gold-light: #dbbe8a;
+$color-beige:      #f5ede0;
+$color-beige-soft: #faf5ee;
+$color-beige-warm: #ede0cc;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+$color-danger:     #8b3a3a;
+$color-success:    #5a8a5a;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+// ── Page ───────────────────────────────────────────────
+.kart-page {
+  min-height: 100vh;
+  width: 100%;
+  font-family: $font-sans;
+  background: $color-beige-soft;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ─────────────────────────────────────────────
+.kart-header {
+  background: linear-gradient(160deg, $color-dark 0%, $color-dark-mid 60%, #4a3f35 100%);
+  padding: 88px 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba($color-gold, 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($color-gold, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-gold, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($color-gold, 0.12);
+    border: 1px solid rgba($color-gold, 0.3);
+    color: $color-gold;
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: $color-gold;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: $color-beige;
+    line-height: 1.1;
+    margin: 0 0 4px;
+  }
+
+  &__rule {
+    width: 44px;
+    height: 2px;
+    background: $color-gold;
+    margin: 20px auto 22px;
+  }
+
+  &__subtitle {
+    font-family: $font-sans;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: $color-text-light;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+// ── Section ────────────────────────────────────────────
+.kart-section {
+  flex-grow: 1;
+  padding: 72px 24px 88px;
+  background: $color-beige-soft;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+// ── Loader ─────────────────────────────────────────────
+.kart-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 80px 0;
+
+  &__spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba($color-gold, 0.2);
+    border-top-color: $color-gold;
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+  }
+
+  &__text {
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    color: $color-text-muted;
+    letter-spacing: 0.06em;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Liste des articles ─────────────────────────────────
+.kart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+// ── Item ───────────────────────────────────────────────
+.kart-item {
+  background: $color-beige;
+  border: 1px solid rgba($color-dark, 0.1);
+  border-left: 3px solid $color-gold;
+  border-radius: 3px;
+  box-shadow: 0 2px 12px rgba($color-dark, 0.05);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba($color-dark, 0.1);
+    border-left-color: $color-dark;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__product {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+
+    @media (max-width: 640px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  // Sous-total points
+  &__pts {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: $font-sans;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: $color-dark;
+    white-space: nowrap;
+
+    svg { color: $color-gold; }
+  }
+
+  // Quantité
+  &__qty {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1.5px solid rgba($color-dark, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__qty-btn {
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    font-family: $font-sans;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $color-dark;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      background: $color-dark;
+      color: $color-gold;
+    }
+
+    &:disabled {
+      color: rgba($color-dark, 0.25);
+      cursor: not-allowed;
+    }
+  }
+
+  &__qty-val {
+    padding: 0 12px;
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $color-dark;
+    min-width: 32px;
+    text-align: center;
+    border-left: 1px solid rgba($color-dark, 0.1);
+    border-right: 1px solid rgba($color-dark, 0.1);
+  }
+
+  // Bouton retirer
+  &__remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1.5px solid rgba($color-danger, 0.35);
+    border-radius: 2px;
+    color: $color-danger;
+    font-family: $font-sans;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      background: $color-danger;
+      color: #fff;
+      border-color: $color-danger;
+    }
+  }
+}
+
+// ── Récapitulatif ──────────────────────────────────────
+.kart-summary {
+  background: $color-dark;
+  border-top: 3px solid $color-gold;
+  border-radius: 3px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow: 0 4px 24px rgba($color-dark, 0.2);
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &__total {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__total-label {
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-text-light;
+  }
+
+  &__total-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $color-gold;
+
+    svg { color: $color-gold; }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: $color-gold;
+    color: $color-dark;
+    border: none;
+    border-radius: 2px;
+    font-family: $font-sans;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba($color-gold, 0.25);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: $color-gold-light;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba($color-gold, 0.3);
+    }
+
+    &:active:not(:disabled) { transform: translateY(0); }
+
+    &--loading {
+      background: rgba($color-gold, 0.45);
+      cursor: not-allowed;
+      color: $color-dark;
+    }
+
+    &--success {
+      background: $color-success;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba($color-success, 0.3);
+    }
+  }
+
+  &__btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba($color-dark, 0.25);
+    border-top-color: $color-dark;
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+    flex-shrink: 0;
+  }
+}
+
+// ── Panier vide ────────────────────────────────────────
+.kart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 80px 0;
+  text-align: center;
+
+  &__icon {
+    width: 72px;
+    height: 72px;
+    background: rgba($color-gold, 0.1);
+    border: 1px solid rgba($color-gold, 0.25);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-gold;
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin: 0;
+  }
+
+  &__sub {
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: $color-text-muted;
+    margin-bottom: 8px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: $color-dark;
+    color: $color-gold;
+    font-family: $font-sans;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba($color-dark, 0.2);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 4px;
+
+    &:hover {
+      background: $color-dark-mid;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba($color-dark, 0.28);
+    }
+    &:active { transform: translateY(0); }
+  }
+}

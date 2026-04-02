@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
 import UserItem from "../types/UserItem";
+import '../styles/listUserComponent.scss';
 
 interface ListUserComponentProps {
   users: UserItem[];
@@ -12,20 +12,16 @@ export default function ListUserComponent({ users, refreshUsers }: ListUserCompo
 
   const deleteUser = async (idUser: number) => {
     try {
-      const response = await fetch(`${api_url}api/User/ArchiveUser/?id=${idUser}`, {
+      const response = await fetch(`${api_url}/api/User/ArchiveUser/?id=${idUser}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
         },
       });
-
-      if (!response.ok) {
-        throw new Error(`Erreur d'archivage: ${response.status} ${response.statusText}`);
-      }
-
+      if (!response.ok) throw new Error(`Erreur d'archivage: ${response.status} ${response.statusText}`);
       console.log(`Utilisateur ${idUser} archivé avec succès`);
-      await refreshUsers(); // Rafraîchir la liste
+      await refreshUsers();
     } catch (error) {
       console.error("Erreur lors de l'archivage de l'utilisateur:", error);
       alert(`Erreur: ${error}`);
@@ -39,71 +35,41 @@ export default function ListUserComponent({ users, refreshUsers }: ListUserCompo
   };
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full border-collapse border-4 border-yellow-400">
-        <thead>
-          <tr className="bg-gray-800 text-white">
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Nom
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Prénom
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Email
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Adresse
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Pays
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold border-r border-yellow-400">
-              Points
-            </th>
-            <th className="px-4 py-3 text-left text-lg font-semibold">
-              Actions
-            </th>
+    <div className="list-table-wrap">
+      <table className="list-table">
+
+        <thead className="list-table__head">
+          <tr>
+            <th className="list-table__th">Nom</th>
+            <th className="list-table__th">Prénom</th>
+            <th className="list-table__th">Email</th>
+            <th className="list-table__th">Adresse</th>
+            <th className="list-table__th">Pays</th>
+            <th className="list-table__th list-table__th--center">Points</th>
+            <th className="list-table__th list-table__th--center">Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {users.length > 0 ? (
-            users.map((user) => (
-              <tr
-                key={user.idUser}
-                className="bg-gray-100 text-gray-800 border-t-2 border-yellow-400 transition duration-300 hover:bg-blue-900 hover:text-white"
-              >
-                <td className="px-4 py-3 border-r border-yellow-400 text-lg font-medium">
-                  {user.lastName}
+            users.map((user, index) => (
+              <tr key={user.idUser} className={`list-table__row ${index % 2 === 0 ? 'list-table__row--even' : ''}`}>
+                <td className="list-table__td list-table__td--name">{user.lastName}</td>
+                <td className="list-table__td list-table__td--name">{user.firstName}</td>
+                <td className="list-table__td list-table__td--muted">{user.email}</td>
+                <td className="list-table__td list-table__td--muted">{user.address}, {user.city}</td>
+                <td className="list-table__td list-table__td--muted">{user.country}</td>
+                <td className="list-table__td list-table__td--center">
+                  <span className="list-table__badge">{user.points} pts</span>
                 </td>
-                <td className="px-4 py-3 border-r border-yellow-400 text-lg font-medium">
-                  {user.firstName}
-                </td>
-                <td className="px-4 py-3 border-r border-yellow-400 text-md">
-                  {user.email}
-                </td>
-                <td className="px-4 py-3 border-r border-yellow-400 text-md">
-                  {user.address}, {user.city}, {user.country}
-                </td>
-                <td className="px-4 py-3 border-r border-yellow-400 text-md">
-                  {user.country}
-                </td>
-                <td className="px-4 py-3 border-r border-yellow-400 text-md">
-                  {user.points}
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center space-x-4">
-                    <Link
-                      to={`/edit-user/${user.idUser}`}
-                      className="bg-yellow-400 text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition duration-300"
-                    >
+                <td className="list-table__td list-table__td--center">
+                  <div className="list-table__actions">
+                    <Link to={`/edit-user/${user.idUser}`} className="list-table__btn list-table__btn--edit">
                       Modifier
                     </Link>
-                    <button
-                      className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 hover:text-gray-800 transition duration-300"
-                      onClick={() => handleDeleteClick(user.idUser)}
-                    >
-                      Supprimer
+                    <button className="list-table__btn list-table__btn--delete"
+                      onClick={() => handleDeleteClick(user.idUser)}>
+                      Archiver
                     </button>
                   </div>
                 </td>
@@ -111,12 +77,11 @@ export default function ListUserComponent({ users, refreshUsers }: ListUserCompo
             ))
           ) : (
             <tr>
-              <td colSpan={7} className="px-4 py-3 text-center text-lg text-gray-500">
-                Aucun utilisateur à afficher pour le moment.
-              </td>
+              <td colSpan={7} className="list-table__empty">Aucun utilisateur à afficher pour le moment.</td>
             </tr>
           )}
         </tbody>
+
       </table>
     </div>
   );

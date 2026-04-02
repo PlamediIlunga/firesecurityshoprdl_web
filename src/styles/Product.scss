@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$color-dark:       #2a2420;
+$color-dark-mid:   #3d3530;
+$color-dark-header:#1e1a16;   // fond sombre du header (style Utilisateurs)
+$color-gold:       #c9a96e;
+$color-gold-light: #dbbe8a;
+$color-beige:      #f5ede0;
+$color-beige-warm: #ede0cc;
+$color-beige-soft: #faf5ee;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+$color-success:    #5a8a6a;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+// ── Utilitaires partagés ───────────────────────────────
+.section-eyebrow {
+  font-family: $font-sans;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $color-gold;
+  margin-bottom: 10px;
+
+  &--gold { color: $color-gold; }
+}
+
+.section-title {
+  font-family: $font-serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: $color-dark;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.gold-rule {
+  width: 44px;
+  height: 2px;
+  background: $color-gold;
+  margin: 18px 0 22px;
+  &--center { margin: 18px auto 22px; }
+}
+
+// ── Page ───────────────────────────────────────────────
+.product-page {
+  min-height: 100vh;
+  width: 100%;
+  font-family: $font-sans;
+  background: $color-beige-soft;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header — fond sombre style Utilisateurs ────────────
+.product-header {
+  background: linear-gradient(160deg, $color-dark 0%, $color-dark-mid 60%, #4a3f35 100%);
+  padding: 72px 24px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Grille subtile identique à la page Utilisateurs
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($color-gold, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-gold, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  // Ligne dorée en bas du header
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  // Badge eyebrow avec bordure (comme sur la page Utilisateurs)
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $color-gold;
+    border: 1px solid rgba($color-gold, 0.35);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  &__eyebrow-dot {
+    font-size: 0.45rem;
+    opacity: 0.7;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: $color-gold-light;
+    line-height: 1.1;
+    margin: 0 0 4px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  }
+
+  &__subtitle {
+    font-family: $font-sans;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba($color-beige, 0.55);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+// ── Liste des produits ─────────────────────────────────
+.product-list-section {
+  padding: 72px 24px;
+  background: $color-beige-soft;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.product-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  color: $color-text-muted;
+  padding: 48px 0;
+
+  &__spinner {
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    color: $color-gold;
+  }
+  &__track { opacity: 0.2; }
+  &__arc   { opacity: 0.85; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.product-list  { margin-top: 8px; }
+
+.product-empty {
+  text-align: center;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: $color-text-muted;
+  padding: 48px 0;
+}
+
+// ── Section formulaire ─────────────────────────────────
+.product-form-section {
+  padding: 72px 24px 88px;
+  background: $color-beige;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+
+.product-form-header {
+  margin-bottom: 40px;
+}
+
+.product-form-title {
+  font-family: $font-serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: $color-dark;
+  line-height: 1.2;
+  margin: 0;
+}
+
+// ── Formulaire 2 colonnes ──────────────────────────────
+.product-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 32px 48px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid rgba($color-dark, 0.08);
+  }
+}
+
+// ── Champs ─────────────────────────────────────────────
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--grow { flex: 1; }
+
+  &__label {
+    font-family: $font-sans;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $color-dark;
+    opacity: 0.55;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: $font-sans;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: $color-dark;
+    background: $color-beige-soft;
+    border: 1px solid rgba($color-dark, 0.15);
+    border-radius: 2px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+
+    &::placeholder { color: rgba($color-dark, 0.28); }
+
+    &:focus {
+      outline: none;
+      border-color: $color-gold;
+      box-shadow: 0 0 0 3px rgba($color-gold, 0.18);
+    }
+
+    &--textarea {
+      resize: none;
+      line-height: 1.7;
+    }
+
+    &--full { height: 100%; min-height: 120px; }
+  }
+
+  &__preview {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__preview-label {
+    font-family: $font-sans;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__preview-img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid rgba($color-dark, 0.1);
+    box-shadow: 0 2px 8px rgba($color-dark, 0.08);
+  }
+
+  &__error {
+    font-family: $font-sans;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #b04040;
+    margin-top: 4px;
+  }
+}
+
+// ── Bouton submit ──────────────────────────────────────
+.product-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: $color-dark;
+  color: $color-gold;
+  font-family: $font-sans;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 16px rgba($color-dark, 0.2);
+
+  &:hover:not(:disabled) {
+    background: $color-dark-mid;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba($color-dark, 0.3);
+  }
+  &:active:not(:disabled) { transform: translateY(0); }
+
+  &--success {
+    background: $color-success;
+    color: #fff;
+    cursor: not-allowed;
+    &:hover { background: $color-success; transform: none; }
+  }
+}

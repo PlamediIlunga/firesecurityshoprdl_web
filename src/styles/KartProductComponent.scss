@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+$color-dark:       #2a2420;
+$color-choco:      #3d2b1f;
+$color-gold:       #c9a96e;
+$color-beige-soft: #faf5ee;
+$color-beige-warm: #ede0cc;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+// ── Ligne horizontale produit ──────────────────────────
+.kart-product {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0; // évite le débordement dans flex parent
+}
+
+// ── Miniature ──────────────────────────────────────────
+.kart-product__thumb {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  background: $color-beige-warm;
+  border: 1px solid rgba($color-dark, 0.1);
+}
+
+.kart-product__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kart-product__no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: rgba($color-gold, 0.5);
+}
+
+// ── Infos ──────────────────────────────────────────────
+.kart-product__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.kart-product__name {
+  font-family: $font-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $color-dark;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kart-product__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.kart-product__article {
+  font-family: $font-sans;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: $color-text-muted;
+}
+
+.kart-product__sep {
+  color: rgba($color-dark, 0.2);
+  font-size: 0.75rem;
+}
+
+.kart-product__unit {
+  font-family: $font-sans;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $color-text-light;
+}
+
+.kart-product__desc {
+  font-family: $font-sans;
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: $color-text-muted;
+  margin: 2px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

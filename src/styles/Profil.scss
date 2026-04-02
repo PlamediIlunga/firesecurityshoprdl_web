@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+$color-dark:       #2a2420;
+$color-dark-mid:   #3d3530;
+$color-gold:       #c9a96e;
+$color-gold-light: #dbbe8a;
+$color-beige:      #f5ede0;
+$color-beige-soft: #faf5ee;
+$color-beige-warm: #ede0cc;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+.profil-page {
+  min-height: 100vh;
+  width: 100%;
+  font-family: $font-sans;
+  background: $color-beige-soft;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ─────────────────────────────────────────────
+.profil-header {
+  background: linear-gradient(160deg, $color-dark 0%, $color-dark-mid 60%, #4a3f35 100%);
+  padding: 88px 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba($color-gold, 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($color-gold, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-gold, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($color-gold, 0.12);
+    border: 1px solid rgba($color-gold, 0.3);
+    color: $color-gold;
+    font-family: $font-sans;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+
+    &::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: $color-gold;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: $color-beige;
+    line-height: 1.1;
+    margin: 0 0 4px;
+  }
+
+  &__rule {
+    width: 44px;
+    height: 2px;
+    background: $color-gold;
+    margin: 20px auto 22px;
+  }
+
+  &__subtitle {
+    font-family: $font-sans;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: $color-text-light;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.profil-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Section infos ──────────────────────────────────────
+.profil-section {
+  padding: 72px 24px 64px;
+  background: $color-beige-soft;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+// ── Loader / Empty ─────────────────────────────────────
+.profil-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 80px 0;
+
+  &__spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba($color-gold, 0.2);
+    border-top-color: $color-gold;
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+  }
+
+  &__text {
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    color: $color-text-muted;
+    letter-spacing: 0.06em;
+  }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.profil-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 80px 0;
+  color: $color-text-muted;
+
+  p { font-family: $font-sans; font-size: 1rem; font-weight: 300; margin: 0; }
+}
+
+// ── Carte profil ───────────────────────────────────────
+.profil-card {
+  background: $color-beige;
+  border: 1px solid rgba($color-dark, 0.1);
+  border-top: 3px solid $color-gold;
+  border-radius: 3px;
+  box-shadow: 0 4px 32px rgba($color-dark, 0.08);
+  padding: 40px 44px 36px;
+
+  @media (max-width: 640px) { padding: 28px 20px 24px; }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  // ── Avatar SVG circulaire ──────────────────────────
+  &__avatar {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 3px rgba($color-gold, 0.3),
+      0 4px 16px rgba($color-dark, 0.2);
+  }
+
+  &__avatar-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &__top-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $font-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__email {
+    font-family: $font-sans;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: $color-text-muted;
+  }
+
+  &__role {
+    font-family: $font-sans;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $color-text-light;
+  }
+
+  &__points-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba($color-gold, 0.12);
+    border: 1px solid rgba($color-gold, 0.3);
+    color: $color-dark;
+    font-family: $font-sans;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 2px;
+    white-space: nowrap;
+    align-self: flex-start;
+
+    svg { color: $color-gold; }
+  }
+
+  &__rule {
+    width: 100%;
+    height: 1px;
+    background: rgba($color-dark, 0.08);
+    margin: 24px 0 28px;
+  }
+
+  &__actions {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: $color-dark;
+    color: $color-gold;
+    font-family: $font-sans;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba($color-dark, 0.2);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background: $color-dark-mid;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba($color-dark, 0.28);
+    }
+    &:active { transform: translateY(0); }
+  }
+}
+
+// ── Section commandes ──────────────────────────────────
+.profil-orders {
+  padding: 64px 24px 88px;
+  background: $color-beige-warm;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba($color-gold, 0.5), transparent);
+  }
+
+  &__inner { max-width: 800px; margin: 0 auto; }
+
+  &__heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  &__num {
+    font-family: $font-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: rgba($color-gold, 0.2);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -4px;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__rule {
+    width: 36px;
+    height: 2px;
+    background: $color-gold;
+    margin-top: 12px;
+  }
+
+  &__card {
+    background: $color-beige;
+    border: 1px solid rgba($color-dark, 0.1);
+    border-top: 3px solid $color-gold;
+    border-radius: 3px;
+    box-shadow: 0 2px 16px rgba($color-dark, 0.06);
+    padding: 52px 40px;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    color: $color-text-muted;
+
+    svg { color: rgba($color-gold, 0.5); margin-bottom: 4px; }
+    p { font-family: $font-sans; font-size: 1rem; font-weight: 600; color: $color-dark; margin: 0; }
+    span { font-family: $font-sans; font-size: 0.9rem; font-weight: 300; margin-bottom: 8px; }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: $color-dark;
+    color: $color-gold;
+    font-family: $font-sans;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    margin-top: 8px;
+    box-shadow: 0 4px 14px rgba($color-dark, 0.2);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover { background: $color-dark-mid; transform: translateY(-2px); box-shadow: 0 8px 20px rgba($color-dark, 0.28); }
+    &:active { transform: translateY(0); }
+  }
+}
+
+$color-dark-mid: #3d3530;

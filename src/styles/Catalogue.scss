@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+// ── Variables (identiques à tout le projet) ────────────
+$color-dark:       #2a2420;
+$color-dark-mid:   #3d3530;
+$color-gold:       #c9a96e;
+$color-gold-light: #dbbe8a;
+$color-beige:      #f5ede0;
+$color-beige-soft: #faf5ee;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+// ── Utilitaires partagés ───────────────────────────────
+.section-eyebrow {
+  font-family: $font-sans;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba($color-dark, 0.55);
+  margin-bottom: 10px;
+}
+
+.gold-rule {
+  width: 44px;
+  height: 2px;
+  background: $color-dark;
+  margin: 18px 0 22px;
+
+  &--center { margin: 18px auto 22px; }
+}
+
+// ── Page ───────────────────────────────────────────────
+.catalogue-page {
+  min-height: 100vh;
+  width: 100%;
+  font-family: $font-sans;
+  background: $color-beige-soft;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Header ─────────────────────────────────────────────
+.catalogue-header {
+  background: linear-gradient(160deg, $color-dark 0%, $color-dark-mid 60%, #4a3f35 100%);
+  padding: 88px 24px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Lueur dorée centrale
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba($color-gold, 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  // Grille subtile
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba($color-gold, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($color-gold, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: $color-beige;
+    line-height: 1.1;
+    margin: 0 0 4px;
+  }
+
+  &__subtitle {
+    font-family: $font-sans;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: $color-text-light;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+}
+
+// Badge eyebrow dans le header sombre
+.catalogue-header .section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba($color-gold, 0.12);
+  border: 1px solid rgba($color-gold, 0.3);
+  color: $color-gold;
+  padding: 6px 14px;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  opacity: 1;
+
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: $color-gold;
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+// ── Filtre catégorie ───────────────────────────────────
+.catalogue-filter {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+
+  &__wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__select {
+    appearance: none;
+    background: rgba($color-beige-soft, 0.1);
+    color: $color-beige;
+    font-family: $font-sans;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 10px 42px 10px 18px;
+    border: 1px solid rgba($color-gold, 0.35);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    option {
+      background: $color-dark-mid;
+      color: $color-beige;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-gold;
+      box-shadow: 0 0 0 3px rgba($color-gold, 0.18);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+    color: $color-gold;
+    pointer-events: none;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($color-dark, 0.1);
+    border: 1px solid rgba($color-dark, 0.2);
+    color: $color-dark;
+    font-family: $font-sans;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+
+  &__tag-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-dark;
+    font-size: 0.75rem;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 1; }
+  }
+}
+
+// ── Section grille ─────────────────────────────────────
+.catalogue-section {
+  padding: 72px 24px 88px;
+  background: $color-beige-soft;
+  flex-grow: 1;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $color-gold, transparent);
+  }
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// ── Grille de cartes ───────────────────────────────────
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 768px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 480px)  { grid-template-columns: 1fr; }
+}
+
+// ── Carte produit ──────────────────────────────────────
+.catalogue-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border: 1px solid rgba($color-dark, 0.12);
+  border-top: 3px solid $color-gold;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 280px;
+  box-sizing: border-box;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-top-color 0.25s ease;
+  box-shadow: 0 2px 12px rgba($color-dark, 0.06);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba($color-dark, 0.14);
+    border-top-color: $color-dark;
+  }
+}
+
+// ── États ──────────────────────────────────────────────
+.catalogue-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: $color-text-muted;
+  padding: 80px 0;
+
+  &__spinner {
+    width: 24px;
+    height: 24px;
+    color: $color-gold;
+    animation: spin 1s linear infinite;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.catalogue-empty {
+  text-align: center;
+  font-family: $font-sans;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: $color-text-muted;
+  padding: 80px 0;
+}
