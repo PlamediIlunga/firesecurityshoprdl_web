@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import '../styles/login.scss';
 
 export default function Login() {
   const [usernameInput, setUsername] = useState('');
   const [passwordInput, setPassword] = useState('');
-  //const [users, setUsers] = useState<UserModel[]>([]);
+  const [ isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [decodedToken, setDecodedToken] = useState<{ idUser?: number; isAdministrator?: boolean } | null>(null);
   const navigate = useNavigate();
   const api_url = import.meta.env.VITE_API_URL;
-  //const api_url = 'https://firemanshoprdlapi.merdyspeed.ca/';
 
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => { }, []);
 
   const login = async (email: string, password: string) => {
     try {
@@ -39,14 +37,12 @@ export default function Login() {
         throw new Error('Token non trouvé dans la réponse');
       }
 
-      // Décoder le token avec jwt-decode
       const payload = jwtDecode<{ idUser: number; isAdministrator: boolean }>(bearerToken);
       setDecodedToken({
         idUser: payload.idUser,
         isAdministrator: payload.isAdministrator,
       });
 
-      // Stocker le token
       localStorage.setItem('bearerToken', bearerToken);
 
       console.log('Connexion réussie', {
@@ -54,7 +50,6 @@ export default function Login() {
         IsAdministrator: payload.isAdministrator,
       });
 
-      // Rediriger vers /Home
       navigate('/Home');
       return bearerToken;
     } catch (error) {
@@ -66,49 +61,75 @@ export default function Login() {
 
   const handlelogin = async () => {
     await login(usernameInput, passwordInput);
-  };
+  };  
 
   return (
-    <div className="min-h-screen bg-red-900 flex items-center justify-center p-6">
+    <div className="login-page">
 
-      <div className="bg-blue-900 rounded-lg border-4 border-yellow-400 p-8 w-full max-w-md shadow-xl">
-        <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Connexion</h1>
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Email"
-            value={usernameInput}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="w-full p-3 rounded border border-yellow-400 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      <div className="login-card">
+
+        <div className="login-card__header">
+          <img
+            src="https://www.ciel103.com/medias/large/nouvelles/logo-incendie.jpg"
+            alt="Logo Service Incendie"
+            className="login-card__logo"
           />
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            value={passwordInput}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full p-3 rounded border border-yellow-400 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-          <button
-            onClick={handlelogin}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded border-2 border-yellow-400 transition duration-300"
-          >
+          <h1 className="login-card__title">Connexion</h1>
+          <p className="login-card__subtitle">Service Incendie — Rivière-du-Loup</p>
+        </div>
+
+        <div className="login-card__body">
+          <div className="login-field">
+            <label className="login-field__label">Email</label>
+            <input
+              type='text'
+              placeholder="votre@email.com"
+              value={usernameInput}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="login-field__input"
+            />
+          </div>
+
+          <div className="login-field">
+            <label className="login-field__label">Mot de passe</label>
+            <input
+              type={isPasswordVisible ? 'text' : 'password'}
+              placeholder="••••••••"
+              value={passwordInput}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="login-field__input"
+              id = "password"
+            />
+            <label typeof="checkbox">
+              <input type="checkbox" id="checkbox"
+               onChange={(e)=> setIsPasswordVisible(e.target.checked)}
+              />
+                Afficher le mot de passe
+            </label>
+          </div>
+
+          <button onClick={handlelogin} className="login-btn">
             Se connecter
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
-          <p className="text-white text-center mt-4">
+
+          <p className="login-card__forgot">
             Mot de passe oublié ?{' '}
-            <a href="#" className="text-yellow-400 hover:text-yellow-300 underline">
-              Cliquez ici
-            </a>
+            <a href="#" className="login-card__forgot-link">Cliquez ici</a>
           </p>
         </div>
+
         {decodedToken && (
-          <div className="mt-4 text-white text-center">
+          <div className="login-card__debug">
             <p>IdUser: {decodedToken.idUser ?? 'Non trouvé'}</p>
             <p>IsAdministrator: {decodedToken.isAdministrator ? 'Oui' : 'Non'}</p>
           </div>
         )}
+
       </div>
     </div>
   );

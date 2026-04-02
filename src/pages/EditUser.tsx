@@ -1,12 +1,13 @@
 import UserItem from '../types/UserItem';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/editUser.scss';
 
 export default function EditUser() {
   const [user, setUser] = useState<UserItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null); // Erreur globale (API, etc.)
+  const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState({
     email: '',
     password: '',
@@ -19,8 +20,7 @@ export default function EditUser() {
   });
   const { idUser } = useParams<{ idUser?: string }>();
   const api_url = import.meta.env.VITE_API_URL;
-  //const api_url = 'http://localhost:5007/'
-  const MAX_LENGTH = 200; // Limite de 200 caractères
+  const MAX_LENGTH = 200;
 
   useEffect(() => {
     const getUserById = async () => {
@@ -29,22 +29,19 @@ export default function EditUser() {
           setIsLoading(true);
           setError(null);
           const token = localStorage.getItem('bearerToken');
-          if (!token) throw new Error('Token d’authentification manquant.');
-          const response = await fetch(`${api_url}api/User/GetUserById/${idUser}`, {
+          if (!token) throw new Error('Token d\'authentification manquant.');
+          const response = await fetch(`${api_url}/api/User/GetUserById/${idUser}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
               authorization: `Bearer ${token}`,
             },
           });
-          if (!response.ok) {
-            throw new Error(`Erreur ${response.status} : Impossible de récupérer l'utilisateur.`);
-          }
+          if (!response.ok) throw new Error(`Erreur ${response.status} : Impossible de récupérer l'utilisateur.`);
           const userData: UserItem = await response.json();
           setUser(userData);
         } catch (err) {
-          const errorMessage = err instanceof Error ? err.message : 'Une erreur inconnue est survenue.';
-          setError(errorMessage);
+          setError(err instanceof Error ? err.message : 'Une erreur inconnue est survenue.');
           setUser(null);
         } finally {
           setIsLoading(false);
@@ -54,70 +51,35 @@ export default function EditUser() {
     getUserById();
   }, [idUser]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
-    
-    // Validation de la longueur pour les champs textuels
     if (type !== 'checkbox' && type !== 'number' && value.length > MAX_LENGTH) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: `Ce champ ne peut pas dépasser ${MAX_LENGTH} caractères.`,
-      }));
+      setErrors((prev) => ({ ...prev, [name]: `Ce champ ne peut pas dépasser ${MAX_LENGTH} caractères.` }));
       return;
     }
-
-    // Mise à jour de l'utilisateur
     setUser((prev) => ({
       ...prev!,
       [name]: type === 'checkbox' ? checked : name === 'points' ? parseInt(value) || 0 : value,
     }));
-
-    // Réinitialiser l'erreur pour ce champ
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const newErrors = { ...errors };
-
-    // Validation email
     if (name === 'email') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      newErrors.email = emailRegex.test(value)
-        ? ''
-        : 'Veuillez entrer un email valide (ex: user@domain.com).';
+      newErrors.email = emailRegex.test(value) ? '' : 'Veuillez entrer un email valide (ex: user@domain.com).';
     }
-
-    // Validation mot de passe
-    if (name === 'password' && value) { // Mot de passe optionnel
+    if (name === 'password' && value) {
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-      newErrors.password = passwordRegex.test(value)
-        ? ''
-        : 'Le mot de passe doit contenir au moins 8 caractères, incluant une lettre et un chiffre.';
+      newErrors.password = passwordRegex.test(value) ? '' : 'Le mot de passe doit contenir au moins 8 caractères, incluant une lettre et un chiffre.';
     }
-
-    // Validation des autres champs pour s'assurer qu'ils ne sont pas vides (sauf province et password)
-    if (name === 'firstName' && !value.trim()) {
-      newErrors.firstName = 'Le prénom est requis.';
-    }
-    if (name === 'lastName' && !value.trim()) {
-      newErrors.lastName = 'Le nom de famille est requis.';
-    }
-    if (name === 'address' && !value.trim()) {
-      newErrors.address = 'L’adresse est requise.';
-    }
-    if (name === 'city' && !value.trim()) {
-      newErrors.city = 'La ville est requise.';
-    }
-    if (name === 'country' && !value.trim()) {
-      newErrors.country = 'Le pays est requis.';
-    }
-
+    if (name === 'firstName' && !value.trim()) newErrors.firstName = 'Le prénom est requis.';
+    if (name === 'lastName' && !value.trim()) newErrors.lastName = 'Le nom de famille est requis.';
+    if (name === 'address' && !value.trim()) newErrors.address = 'L\'adresse est requise.';
+    if (name === 'city' && !value.trim()) newErrors.city = 'La ville est requise.';
+    if (name === 'country' && !value.trim()) newErrors.country = 'Le pays est requis.';
     setErrors(newErrors);
   };
 
@@ -125,382 +87,267 @@ export default function EditUser() {
     e.preventDefault();
     setError(null);
     setIsSubmitted(false);
-
     const form = e.target as HTMLFormElement;
-    
-    // Vérifier les erreurs de validation
     const formErrors = Object.values(errors).some((err) => err !== '');
     if (!formErrors && form.checkValidity() && user) {
       try {
         const token = localStorage.getItem('bearerToken');
-        if (!token) throw new Error('Token d’authentification manquant.');
+        if (!token) throw new Error('Token d\'authentification manquant.');
         const response = await fetch(`${api_url}/api/User/UpdateUser`, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer ${token}`,
-          },
+          headers: { 'Content-Type': 'application/json', authorization: `Bearer ${token}` },
           body: JSON.stringify(user),
         });
-        if (!response.ok) {
-          throw new Error(`Erreur ${response.status} : Impossible de mettre à jour l'utilisateur.`);
-        }
+        if (!response.ok) throw new Error(`Erreur ${response.status} : Impossible de mettre à jour l'utilisateur.`);
         setIsSubmitted(true);
         setTimeout(() => setIsSubmitted(false), 2000);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Une erreur inconnue est survenue.';
-        setError(errorMessage);
+        setError(err instanceof Error ? err.message : 'Une erreur inconnue est survenue.');
       }
     } else {
       form.reportValidity();
-      // Déclencher la validation pour tous les champs
       const inputs = form.querySelectorAll('input');
       inputs.forEach((input) => handleValidation({ target: input } as React.ChangeEvent<HTMLInputElement>));
     }
   };
 
   return (
-    <div className="min-h-screen bg-red-900 text-white">
-      <header className="py-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Administration</h1>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto">
-          Bienvenue dans la section de modification d'un utilisateur, vous pouvez
-          modifier les informations de l'utilisateur.
-        </p>
+    <div className="edit-user-page">
+
+      {/* EN-TÊTE — fond sombre */}
+      <header className="edit-user-header">
+        <div className="edit-user-header__inner">
+          <div className="edit-user-header__eyebrow">
+            <span className="edit-user-header__eyebrow-dot">◆</span>
+            PANNEAU D'ADMINISTRATION
+          </div>
+          <h1 className="edit-user-header__title">
+            {user ? `${user.lastName} ${user.firstName}` : 'Modifier l\'utilisateur'}
+          </h1>
+          <div className="gold-rule gold-rule--center" />
+          <p className="edit-user-header__subtitle">
+            Modifiez les informations de l'utilisateur et enregistrez les changements.
+          </p>
+        </div>
       </header>
 
-      <section className="py-16">
-        <div className="max-w-3xl mx-auto px-4">
+      {/* CONTENU */}
+      <section className="edit-user-section">
+        <div className="edit-user-section__inner">
+
+          {/* Bandeau erreur globale */}
           {error && (
-            <div className="mb-4 p-4 bg-red-100 text-red-800 rounded-lg">
-              <p>{error}</p>
-            </div>
-          )}
-          {isSubmitted && (
-            <div className="mb-4 p-4 bg-green-100 text-green-800 rounded-lg">
-              <p>Utilisateur modifié avec succès !</p>
-            </div>
-          )}
-          {isLoading ? (
-            <div className="text-center text-lg flex items-center justify-center">
-              <svg
-                className="animate-spin h-5 w-5 mr-3 text-yellow-400"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8z"
-                />
+            <div className="eu-alert eu-alert--error">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
+                <path d="M8 4.5v4M8 10.5v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
-              Chargement de l'utilisateur...
+              {error}
+            </div>
+          )}
+
+          {/* Bandeau succès */}
+          {isSubmitted && (
+            <div className="eu-alert eu-alert--success">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Utilisateur modifié avec succès !
+            </div>
+          )}
+
+          {/* Chargement */}
+          {isLoading ? (
+            <div className="eu-loading">
+              <svg className="eu-loading__spinner" viewBox="0 0 24 24">
+                <circle className="eu-loading__track" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" fill="none" />
+                <path className="eu-loading__arc" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+              </svg>
+              <span>Chargement de l'utilisateur...</span>
             </div>
           ) : user ? (
-            <div className="bg-gray-100 text-gray-800 p-8 rounded-lg border-4 border-yellow-400 shadow-2xl">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-                Modifier : {user.lastName} {user.firstName}
-              </h2>
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={user.email || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: marc.tremblay@serviceincendie-rdl.ca"
-                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-                    onInvalid={(e) =>
-                      (e.target as HTMLInputElement).setCustomValidity(
-                        'Veuillez entrer un email valide (ex: user@domain.com).'
-                      )
-                    }
-                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
-                
-                {/*
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Mot de passe
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={user.password || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Laisser vide pour ne pas modifier"
-                    pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}"
-                    onInvalid={(e) =>
-                      (e.target as HTMLInputElement).setCustomValidity(
-                        'Le mot de passe doit contenir au moins 8 caractères, incluant une lettre et un chiffre.'
-                      )
-                    }
-                    onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.password ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                  />
-                  {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-                  )}
-                </div>
-                */}
 
-                <div>
-                  <label
-                    htmlFor="points"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Points
-                  </label>
-                  <input
-                    type="number"
-                    id="points"
-                    name="points"
-                    value={user.points || 0}
-                    onChange={handleChange}
-                    placeholder="Ex: 300"
-                    min="0"
-                    className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 focus:border-yellow-400 focus:outline-none text-gray-800"
-                    required
-                  />
+            <form className="eu-form" onSubmit={handleSubmit}>
+
+              {/* ── SECTION : Identifiants ── */}
+              <div className="eu-form__section">
+                <p className="eu-form__section-label">Identifiants</p>
+                <div className="eu-form__grid">
+                  <div className="form-field">
+                    <label htmlFor="email" className="form-field__label">Adresse email</label>
+                    <input
+                      type="email" id="email" name="email"
+                      value={user.email || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: marc.tremblay@serviceincendie-rdl.ca"
+                      className={`form-field__input${errors.email ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.email && <p className="form-field__error">{errors.email}</p>}
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="points" className="form-field__label">Points</label>
+                    <input
+                      type="number" id="points" name="points"
+                      value={user.points || 0}
+                      onChange={handleChange}
+                      placeholder="Ex: 300"
+                      min="0"
+                      className="form-field__input"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* ── SECTION : Identité ── */}
+              <div className="eu-form__section">
+                <p className="eu-form__section-label">Identité</p>
+                <div className="eu-form__grid">
+                  <div className="form-field">
+                    <label htmlFor="firstName" className="form-field__label">Prénom</label>
+                    <input
+                      type="text" id="firstName" name="firstName"
+                      value={user.firstName || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: Marc"
+                      className={`form-field__input${errors.firstName ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.firstName && <p className="form-field__error">{errors.firstName}</p>}
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="lastName" className="form-field__label">Nom de famille</label>
+                    <input
+                      type="text" id="lastName" name="lastName"
+                      value={user.lastName || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: Tremblay"
+                      className={`form-field__input${errors.lastName ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.lastName && <p className="form-field__error">{errors.lastName}</p>}
+                  </div>
+                </div>
+              </div>
+
+              {/* ── SECTION : Adresse ── */}
+              <div className="eu-form__section">
+                <p className="eu-form__section-label">Adresse</p>
+                <div className="eu-form__grid eu-form__grid--full">
+                  <div className="form-field">
+                    <label htmlFor="address" className="form-field__label">Adresse</label>
+                    <input
+                      type="text" id="address" name="address"
+                      value={user.address || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: 45 Rue des Pompiers"
+                      className={`form-field__input${errors.address ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.address && <p className="form-field__error">{errors.address}</p>}
+                  </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Prénom
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={user.firstName || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: Marc"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.firstName ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.firstName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
-                  )}
-                </div>
+                <div className="eu-form__grid eu-form__grid--three">
+                  <div className="form-field">
+                    <label htmlFor="city" className="form-field__label">Ville</label>
+                    <input
+                      type="text" id="city" name="city"
+                      value={user.city || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: Rivière-du-Loup"
+                      className={`form-field__input${errors.city ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.city && <p className="form-field__error">{errors.city}</p>}
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="lastName"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Nom de famille
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={user.lastName || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: Tremblay"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.lastName ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.lastName && (
-                    <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
-                  )}
-                </div>
+                  <div className="form-field">
+                    <label htmlFor="province" className="form-field__label">Province</label>
+                    <input
+                      type="text" id="province" name="province"
+                      value={user.province || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: Québec"
+                      className={`form-field__input${errors.province ? ' form-field__input--error' : ''}`}
+                    />
+                    {errors.province && <p className="form-field__error">{errors.province}</p>}
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="address"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Adresse
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={user.address || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: 45 Rue des Pompiers"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.address ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">{errors.address}</p>
-                  )}
+                  <div className="form-field">
+                    <label htmlFor="country" className="form-field__label">Pays</label>
+                    <input
+                      type="text" id="country" name="country"
+                      value={user.country || ''}
+                      onChange={(e) => { handleChange(e); handleValidation(e); }}
+                      placeholder="Ex: Canada"
+                      className={`form-field__input${errors.country ? ' form-field__input--error' : ''}`}
+                      required
+                    />
+                    {errors.country && <p className="form-field__error">{errors.country}</p>}
+                  </div>
                 </div>
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="city"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Ville
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    value={user.city || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: Rivière-du-Loup"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.city ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.city && (
-                    <p className="text-red-500 text-sm mt-1">{errors.city}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="province"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Province
-                  </label>
-                  <input
-                    type="text"
-                    id="province"
-                    name="province"
-                    value={user.province || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: Québec"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.province ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                  />
-                  {errors.province && (
-                    <p className="text-red-500 text-sm mt-1">{errors.province}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="country"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Pays
-                  </label>
-                  <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    value={user.country || ''}
-                    onChange={(e) => {
-                      handleChange(e);
-                      handleValidation(e);
-                    }}
-                    placeholder="Ex: Canada"
-                    className={`w-full px-4 py-2 rounded-lg border-2 ${
-                      errors.country ? 'border-red-500' : 'border-gray-300'
-                    } focus:border-yellow-400 focus:outline-none text-gray-800`}
-                    required
-                  />
-                  {errors.country && (
-                    <p className="text-red-500 text-sm mt-1">{errors.country}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="isAdministrator"
-                    className="block text-lg font-semibold text-gray-700 mb-2"
-                  >
-                    Administrateur
-                  </label>
+              {/* ── SECTION : Rôle ── */}
+              <div className="eu-form__section">
+                <p className="eu-form__section-label">Rôle</p>
+                <div className="eu-checkbox">
                   <input
                     type="checkbox"
                     id="isAdministrator"
                     name="isAdministrator"
                     checked={user.isAdministrator || false}
                     onChange={handleChange}
-                    className="h-5 w-5 text-yellow-400 border-gray-300 rounded focus:ring-yellow-400"
+                    className="eu-checkbox__input"
                   />
-                  <span className="ml-2 text-gray-700">
-                    Cocher pour donner des droits d'administrateur
-                  </span>
+                  <label htmlFor="isAdministrator" className="eu-checkbox__label">
+                    <span className="eu-checkbox__box">
+                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                        <path d="M1 4l3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </span>
+                    Accorder les droits d'administrateur
+                  </label>
                 </div>
+              </div>
 
-                <div className="mt-8">
-                  <button
-                    type="submit"
-                    disabled={isLoading || isSubmitted}
-                    className={`w-full py-4 rounded-lg font-semibold text-lg transition duration-300 ${
-                      isSubmitted
-                        ? 'bg-green-500 text-white cursor-not-allowed'
-                        : 'bg-yellow-400 text-gray-800 hover:bg-yellow-500'
-                    } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    {isLoading ? 'Chargement...' : isSubmitted ? 'Utilisateur modifié !' : 'Modifier l’utilisateur'}
-                  </button>
-                </div>
-              </form>
-            </div>
+              {/* ── FOOTER bouton ── */}
+              <div className="eu-form__footer">
+                <button
+                  type="submit"
+                  disabled={isLoading || isSubmitted}
+                  className={`eu-submit-btn${isSubmitted ? ' eu-submit-btn--success' : ''}`}
+                >
+                  {isSubmitted ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 8l4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Utilisateur modifié !
+                    </>
+                  ) : (
+                    <>
+                      Enregistrer les modifications
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
+
+            </form>
+
           ) : (
-            <p className="text-center text-lg">
-              Les informations de l'utilisateur n'ont pas pu être obtenues.
-            </p>
+            <p className="eu-empty">Les informations de l'utilisateur n'ont pas pu être obtenues.</p>
           )}
         </div>
       </section>
+
     </div>
   );
 }

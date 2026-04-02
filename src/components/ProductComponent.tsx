@@ -1,18 +1,34 @@
 import ProduitItem from "../types/ProduitItem";
 import { CiImageOn } from "react-icons/ci";
+import '../styles/productComponent.scss';
+
 export default function ProductComponent({ product }: { product: ProduitItem }) {
-    return (
-        <div>
-            <p>{product.imageUrl ? (
-                <img
-                    src={product.imageUrl}
-                    className="w-20 h-20 object-cover rounded-lg"
-                />
-            ) : (<CiImageOn className="text-6xl text-gray-400 h-10 w-10 flex items-center" />)}</p>
-            <p className="text-lg font-semibold">Nom : {product.name}</p>
-            <p className="text-md">No D'article : {product.noArticle}</p>
-            <p className="text-md">Points : {product.points}</p>
-            <p className="text-md">Description : {product.description}</p>
+  return (
+    <div className="product-card">
+
+      {/* MOITIÉ HAUTE — beige, image plein format */}
+      <div className="product-card__top">
+        {product.imageUrl ? (
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="product-card__img"
+          />
+        ) : (
+          <CiImageOn className="product-card__placeholder" />
+        )}
+      </div>
+
+      {/* MOITIÉ BASSE — chocolat, textes centrés */}
+      <div className="product-card__bottom">
+        <p className="product-card__name">{product.name}</p>
+        <div className="product-card__meta">
+          <span className="product-card__badge">{product.points} pts</span>
+          <span className="product-card__article">#{product.noArticle}</span>
         </div>
-    )
+        <p className="product-card__desc">{product.description}</p>
+      </div>
+
+    </div>
+  );
 }

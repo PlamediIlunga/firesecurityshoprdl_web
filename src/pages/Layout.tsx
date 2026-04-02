@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { jwtDecode } from 'jwt-decode';
+import '../styles/Layout.scss';
 
 const Layout = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -36,108 +37,78 @@ const Layout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-red-700 flex flex-col w-full m-0 p-0">
-      <header className="bg-blue-900 border-b-4 border-yellow-400 shadow-lg w-full">
-        <nav className="w-full max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <a id="logo" href="/Home" className="flex items-center">
+    <div className="layout-root">
+
+      {/* ── HEADER ── */}
+      <header className="layout-header">
+        <nav className="layout-nav">
+          <div className="layout-nav__left">
+            <a href="/Home" className="layout-nav__logo">
               <img
                 src="https://www.ciel103.com/medias/large/nouvelles/logo-incendie.jpg"
                 alt="Logo Service Incendie"
-                className="h-12 w-12 rounded-full object-cover"
+                className="layout-nav__logo-img"
               />
             </a>
-            <Link
-              to="/Home"
-              className="text-yellow-400 text-lg font-semibold hover:text-yellow-300 transition duration-300"
-            >
-              <IoMdHome size={30} />
+            <Link to="/Home" className="layout-nav__link layout-nav__link--icon">
+              <IoMdHome size={22} />
             </Link>
-            <Link
-              to="/Home/Catalogue"
-              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-            >
+            <Link to="/Home/Catalogue" className="layout-nav__link">
               Catalogue
             </Link>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <Link
-              to="/Home/Contact"
-              className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-            >
+          <div className="layout-nav__right">
+            <Link to="/Home/Contact" className="layout-nav__link">
               Contact
             </Link>
-            <Link
-              to="/kart"
-              className="text-yellow-400 text-base font-medium hover:text-yellow-400 transition duration-300"
-            >
-              <FaCartShopping size={30} />
+            <Link to="/kart" className="layout-nav__link layout-nav__link--icon">
+              <FaCartShopping size={22} />
             </Link>
 
-            {decodedToken?.role === "Admin" ? ( // Si claim est "Role", utilisez decodedToken?.Role
-              <Link
-                to="/Home/Administration/"
-                className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-              >
+            {decodedToken?.role === "Admin" ? (
+              <Link to="/Home/Administration/" className="layout-nav__link">
                 Administration
               </Link>
             ) : (
-              <Link
-                to="/Home/Order/"
-                className="text-white text-base font-medium hover:text-yellow-400 transition duration-300"
-              >
+              <Link to="/Home/Order/" className="layout-nav__link">
                 Commandes
               </Link>
             )}
-            <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="text-white hover:text-yellow-400 transition duration-300 focus:outline-none"
-              >
-                <RiAccountCircleFill size={70} />
+
+            <div className="layout-nav__account">
+              <button onClick={toggleDropdown} className="layout-nav__account-btn">
+                <RiAccountCircleFill size={40} />
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-blue-900 border border-yellow-400 rounded-lg shadow-lg z-50">
-                  <div className="px-4 py-3">
-                    <span className="block text-sm text-white font-semibold">
+                <div className="layout-dropdown">
+                  <div className="layout-dropdown__header">
+                    <span className="layout-dropdown__name">
                       {decodedToken?.email ? decodedToken.email.split('@')[0] : 'Non connecté'}
                     </span>
-                    <span className="block text-sm text-gray-300 truncate">
-                      {decodedToken?.role === "Admin" ? 'Administrateur' : 'Utilisateur'} {/* Si claim est "Role", utilisez decodedToken?.Role */}
+                    <span className="layout-dropdown__role">
+                      {decodedToken?.role === "Admin" ? 'Administrateur' : 'Utilisateur'}
                     </span>
                   </div>
-                  <ul className="py-2">
+                  <ul className="layout-dropdown__menu">
                     <li>
-                      <Link
-                        to={`/Profil/${decodedToken?.idUser}`}
-                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
-                      >
+                      <Link to={`/Profil/${decodedToken?.idUser}`} className="layout-dropdown__item">
                         Profil
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
-                      >
+                      <Link to="#" className="layout-dropdown__item">
                         Paramètres
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="block px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
-                      >
+                      <Link to="#" className="layout-dropdown__item">
                         Points
                       </Link>
                     </li>
                     <li>
-                      <button
-                        onClick={handleLogout}
-                        className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-blue-800 hover:text-yellow-300 transition duration-300"
-                      >
+                      <button onClick={handleLogout} className="layout-dropdown__item layout-dropdown__item--logout">
                         Déconnexion
                       </button>
                     </li>
@@ -149,56 +120,37 @@ const Layout = () => {
         </nav>
       </header>
 
-      <main className="flex-grow w-full bg-red-700">
+      {/* ── MAIN ── */}
+      <main className="layout-main">
         <Outlet />
       </main>
 
-      <footer className="bg-blue-900 border-t-4 border-yellow-400 py-6 text-center shadow-inner w-full">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-white mb-4">
-            <h2 className="text-xl font-bold text-yellow-400 mb-2">
-              Service Incendie Rivière-du-Loup
-            </h2>
-            <p className="text-sm">
-              123 Rue des Pompiers, Rivière-du-Loup, QC G5R 0A1
-            </p>
-            <p className="text-sm">
+      {/* ── FOOTER ── */}
+      <footer className="layout-footer">
+        <div className="layout-footer__inner">
+          <div className="layout-footer__info">
+            <h2 className="layout-footer__title">Service Incendie Rivière-du-Loup</h2>
+            <p className="layout-footer__text">123 Rue des Pompiers, Rivière-du-Loup, QC G5R 0A1</p>
+            <p className="layout-footer__text">
               Téléphone : (418) 555-1234 | Email :{" "}
-              <a
-                href="mailto:contact@serviceincendie-rdl.ca"
-                className="text-yellow-400 hover:text-yellow-300 transition duration-300"
-              >
+              <a href="mailto:contact@serviceincendie-rdl.ca" className="layout-footer__link">
                 contact@serviceincendie-rdl.ca
               </a>
             </p>
           </div>
 
-          <div className="flex justify-center space-x-6 mb-4">
-            <Link
-              to="#"
-              className="text-white text-sm font-medium hover:text-yellow-400 transition duration-300"
-            >
-              À propos
-            </Link>
-            <Link
-              to="#"
-              className="text-white text-sm font-medium hover:text-yellow-400 transition duration-300"
-            >
-              Contact
-            </Link>
-            <Link
-              to="#"
-              className="text-white text-sm font-medium hover:text-yellow-400 transition duration-300"
-            >
-              Politique de confidentialité
-            </Link>
+          <div className="layout-footer__rule" />
+
+          <div className="layout-footer__links">
+            <Link to="#" className="layout-footer__nav-link">À propos</Link>
+            <Link to="#" className="layout-footer__nav-link">Contact</Link>
+            <Link to="#" className="layout-footer__nav-link">Politique de confidentialité</Link>
           </div>
 
-          <div className="text-yellow-400 text-sm">
-            © 2025 Plamedi Ilunga. Tous droits réservés.
-          </div>
+          <p className="layout-footer__copy">© 2025 Plamedi Ilunga. Tous droits réservés.</p>
         </div>
       </footer>
+
     </div>
   );
 };

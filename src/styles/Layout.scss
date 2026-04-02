@@ -1,72 +1,269 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #87CEEB;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+// ── Variables ──────────────────────────────────────────
+$color-dark:       #2a2420;
+$color-dark-mid:   #3d3530;
+$color-gold:       #c9a96e;
+$color-gold-light: #dbbe8a;
+$color-beige:      #f5ede0;
+$color-beige-soft: #faf5ee;
+$color-text-muted: #7a6e64;
+$color-text-light: #a89880;
+
+$font-serif: 'Playfair Display', Georgia, serif;
+$font-sans:  'Source Sans 3', sans-serif;
+
+// ── Layout Root ────────────────────────────────────────
+.layout-root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-sans;
+  background: $color-beige-soft;
+  margin: 0;
+  padding: 0;
+}
+
+// ── Header ─────────────────────────────────────────────
+.layout-header {
+  background: $color-gold;
+  border-bottom: 2px solid $color-dark;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba($color-dark, 0.2);
+}
+
+.layout-nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__left,
+  &__right {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    gap: 28px;
   }
-  
-  .navLayout {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: #333;
-    padding: 10px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-  
-    nav ul li {
-      padding: 10px 20px;
-      color: white;
-      font-size: 18px;
-    }
-  
-    nav ul li a {
-      text-decoration: none;
-      color: white;
-      transition: color 0.3s ease-in-out;
-    }
-  
-    nav ul li a:hover {
-      color: #ffcc00;
-    }
-  }
-  
-  #logo {
+
+  &__logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: white;
-    font-weight: bold;
+    flex-shrink: 0;
   }
-  
-  hr {
+
+  &__logo-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $color-gold;
+    transition: border-color 0.2s ease;
+
+    &:hover { border-color: $color-gold-light; }
+  }
+
+  &__link {
+    font-family: $font-sans;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: $color-dark;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+
+    &:hover { color: rgba($color-dark, 0.55); }
+
+    &--icon {
+      color: $color-dark;
+      &:hover { color: rgba($color-dark, 0.55); }
+    }
+  }
+
+  &__account {
+    position: relative;
+  }
+
+  &__account-btn {
+    background: none;
     border: none;
-    height: 1px;
-    background-color: #ccc;
-    margin: 80px 0 20px; /* Ajustement pour éviter le chevauchement avec le header */
+    cursor: pointer;
+    color: $color-dark;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 50%;
+    transition: color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      color: rgba($color-dark, 0.55);
+      background: rgba($color-dark, 0.08);
+    }
+
+    &:focus { outline: none; }
   }
-  
-  .footer {
-    position: fixed;
-    bottom: 0;
+}
+
+// ── Dropdown ───────────────────────────────────────────
+.layout-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 210px;
+  background: $color-dark-mid;
+  border: 1px solid rgba($color-gold, 0.25);
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba($color-dark, 0.4);
+  overflow: hidden;
+  z-index: 200;
+
+  &__header {
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid rgba($color-gold, 0.15);
+  }
+
+  &__name {
+    display: block;
+    font-family: $font-sans;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-beige;
+    margin-bottom: 2px;
+  }
+
+  &__role {
+    display: block;
+    font-family: $font-sans;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-gold;
+  }
+
+  &__menu {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+  }
+
+  &__item {
+    display: block;
     width: 100%;
-    background-color: #333;
-    color: white;
+    text-align: left;
+    padding: 10px 18px;
+    font-family: $font-sans;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: rgba($color-beige, 0.75);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: rgba($color-gold, 0.08);
+      color: $color-gold;
+    }
+
+    &--logout {
+      border-top: 1px solid rgba($color-gold, 0.12);
+      margin-top: 4px;
+      color: rgba($color-beige, 0.5);
+
+      &:hover {
+        color: #e07070;
+        background: rgba(#e07070, 0.06);
+      }
+    }
+  }
+}
+
+// ── Main ───────────────────────────────────────────────
+.layout-main {
+  flex-grow: 1;
+  width: 100%;
+}
+
+// ── Footer ─────────────────────────────────────────────
+.layout-footer {
+  background: $color-gold;
+  border-top: 2px solid $color-dark;
+  padding: 48px 24px;
+  width: 100%;
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
     text-align: center;
-    padding: 20px;
   }
-  
-  .textFooter {
-    font-size: 14px;
+
+  &__title {
+    font-family: $font-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin-bottom: 8px;
   }
-  
+
+  &__text {
+    font-family: $font-sans;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: rgba($color-dark, 0.65);
+    margin-bottom: 4px;
+  }
+
+  &__link {
+    color: $color-dark;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+
+    &:hover { color: rgba($color-dark, 0.55); }
+  }
+
+  &__rule {
+    width: 40px;
+    height: 1px;
+    background: rgba($color-dark, 0.25);
+    margin: 24px auto;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  &__nav-link {
+    font-family: $font-sans;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba($color-dark, 0.65);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover { color: $color-dark; }
+  }
+
+  &__copy {
+    font-family: $font-sans;
+    font-size: 0.75rem;
+    color: rgba($color-dark, 0.45);
+    letter-spacing: 0.06em;
+  }
+}
