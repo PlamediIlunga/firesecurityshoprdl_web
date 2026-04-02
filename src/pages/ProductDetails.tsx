@@ -2,7 +2,7 @@ import ProduitItem from '../types/ProduitItem';
 import MyProduct from '../components/ProductDetailsComponent';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/productDetail.scss';
+import '../styles/ProductDetail.scss';
 
 export default function ProductDetail() {
   const api_url = import.meta.env.VITE_API_URL;

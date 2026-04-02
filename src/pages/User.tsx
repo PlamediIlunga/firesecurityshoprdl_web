@@ -1,7 +1,7 @@
 import UserItem from '../types/UserItem';
 import ListUserComponent from '../components/ListUserComponent';
 import { useState, useEffect } from 'react';
-import '../styles/user.scss';
+import '../styles/User.scss';
 
 export default function User() {
   const [users, setUsers] = useState<UserItem[]>([]);

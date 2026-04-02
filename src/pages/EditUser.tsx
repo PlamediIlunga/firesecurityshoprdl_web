@@ -1,7 +1,7 @@
 import UserItem from '../types/UserItem';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/editUser.scss';
+import '../styles/EditUser.scss';
 
 export default function EditUser() {
   const [user, setUser] = useState<UserItem | null>(null);

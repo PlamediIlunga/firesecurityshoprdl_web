@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import '../styles/login.scss';
+import '../styles/Login.scss';
 
 export default function Login() {
   const [usernameInput, setUsername] = useState('');

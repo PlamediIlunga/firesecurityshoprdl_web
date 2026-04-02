@@ -2,7 +2,7 @@ import ProduitItem from '../types/ProduitItem';
 import MyProducts from '../components/ProductComponent';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/catalogue.scss';
+import '../styles/Catalogue.scss';
 
 export default function Catalogue() {
   const [products, setProducts] = useState<ProduitItem[]>([]);

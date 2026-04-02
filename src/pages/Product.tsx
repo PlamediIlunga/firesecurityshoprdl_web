@@ -1,7 +1,7 @@
 import ProduitItem from '../types/ProduitItem';
 import ListProducts from '../components/ListProductComponent';
 import { useState, useEffect } from 'react';
-import '../styles/product.scss';
+import '../styles/Product.scss';
 
 export default function Product() {
   const [products, setProducts] = useState<ProduitItem[]>([]);

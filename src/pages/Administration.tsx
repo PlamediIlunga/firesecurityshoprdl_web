@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import '../styles/administration.scss';
+import '../styles/Administration.scss';
 
 export default function Administration() {
   return (

@@ -1,7 +1,7 @@
 import ProduitItem from '../types/ProduitItem';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/editProduct.scss';
+import '../styles/EditProduct.scss';
 
 export default function EditProduct() {
   const [product, setProduct] = useState<ProduitItem | null>(null);

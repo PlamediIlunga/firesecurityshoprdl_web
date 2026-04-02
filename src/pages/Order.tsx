@@ -3,7 +3,7 @@ import OrderComponent from "../components/OrderComponent";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import '../styles/order.scss';
+import '../styles/Order.scss';
 
 export default function Orders() {
   const api_url = import.meta.env.VITE_API_URL;

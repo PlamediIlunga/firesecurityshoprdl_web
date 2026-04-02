@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import UserItem from '../types/UserItem';
 import UserComponent from '../components/UserComponent';
-import '../styles/profil.scss';
+import '../styles/Profil.scss';
 
 export let idCurrentUser = 0;
 
