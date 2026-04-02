@@ -1,7 +1,7 @@
 import ProduitItem from "../types/ProduitItem";
 import { CiImageOn } from "react-icons/ci";
 import { useState } from "react";
-import "../styles/productDetailsComponent.scss";
+import "../styles/ProductDetailsComponent.scss";
 
 interface CartItem extends ProduitItem {
   quantity: number;

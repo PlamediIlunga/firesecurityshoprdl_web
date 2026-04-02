@@ -1,6 +1,6 @@
 import ProduitItem from "../types/ProduitItem";
 import { CiImageOn } from "react-icons/ci";
-import '../styles/productComponent.scss';
+import '../styles/ProductComponent.scss';
 
 export default function ProductComponent({ product }: { product: ProduitItem }) {
   return (

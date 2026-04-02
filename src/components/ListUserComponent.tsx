@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import UserItem from "../types/UserItem";
-import '../styles/listUserComponent.scss';
+import '../styles/ListUserComponent.scss';
 
 interface ListUserComponentProps {
   users: UserItem[];

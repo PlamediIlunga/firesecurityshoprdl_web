@@ -1,7 +1,7 @@
 import ProduitItem from "../types/ProduitItem";
 import { CiImageOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import '../styles/listProductComponent.scss';
+import '../styles/ListProductComponent.scss';
 
 interface ListProductComponentProps {
   products: ProduitItem[];

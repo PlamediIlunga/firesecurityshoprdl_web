@@ -1,6 +1,6 @@
 import ProduitItem from "../types/ProduitItem";
 import { CiImageOn } from "react-icons/ci";
-import '../styles/kartProductComponent.scss';
+import '../styles/KartProductComponent.scss';
 
 export default function KartProductComponent({ product }: { product: ProduitItem }) {
   return (

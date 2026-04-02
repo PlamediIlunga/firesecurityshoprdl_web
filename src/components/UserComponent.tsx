@@ -1,5 +1,5 @@
 import UserItem from "../types/UserItem";
-import '../styles/userComponent.scss';
+import '../styles/UserComponent.scss';
 
 export default function UserProfileComponent({ user }: { user: UserItem }) {
   return (
