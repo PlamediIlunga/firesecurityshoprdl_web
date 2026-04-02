@@ -3,7 +3,7 @@ import KartProductComponent from '../components/KartProductComponent';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import '../styles/kart.scss';
+import '../styles/Kart.scss';
 
 interface CartItem extends ProduitItem {
   quantity: number;
