@@ -43,13 +43,13 @@ const Layout = () => {
       <header className="layout-header">
         <nav className="layout-nav">
           <div className="layout-nav__left">
-            <a href="/Home" className="layout-nav__logo">
+            <Link to="/Home" className="layout-nav__logo">
               <img
                 src="https://www.ciel103.com/medias/large/nouvelles/logo-incendie.jpg"
                 alt="Logo Service Incendie"
                 className="layout-nav__logo-img"
               />
-            </a>
+            </Link>
             <Link to="/Home" className="layout-nav__link layout-nav__link--icon">
               <IoMdHome size={22} />
             </Link>

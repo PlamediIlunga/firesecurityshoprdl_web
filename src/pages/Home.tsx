@@ -1,4 +1,5 @@
 import '../styles/Home.scss';
+import {Link} from "react-router-dom";
 
 export default function Home() {
   return (
@@ -15,12 +16,12 @@ export default function Home() {
             <p className="home-hero__subtitle">
               Échangez vos points pour des vêtements et équipements incendie. Un service dédié aux pompiers pour gérer vos besoins avec efficacité et fierté !
             </p>
-            <a href="/Home/Catalogue" className="btn-gold">
+            <Link to="/Home/Catalogue" className="btn-gold">
               Découvrir le Catalogue
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                 <path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </a>
+            </Link>
           </div>
         </section>
 
